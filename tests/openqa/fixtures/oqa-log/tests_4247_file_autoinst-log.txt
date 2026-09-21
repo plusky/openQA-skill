@@ -1,0 +1,12 @@
+[2030-01-01T10:00:01.000000Z] [debug] [pid:4711] ||| starting sshd tests/console/sshd.pm
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4711] [step:console,sshd,1] tests/console/sshd.pm:20 called testapi::assert_script_run
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4711] <<< testapi::assert_script_run(cmd="systemctl start sshd", timeout=90)
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4711] [step:console,sshd,1] tests/console/sshd.pm:20 called testapi::assert_script_run
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4712] <<< consoles::serial_screen::read_until(timeout=90, pattern=[
+    "# "
+  ], cmd="backend_wait_serial")
+[2030-01-01T10:00:02.000000Z] [info] [pid:4712] ::: consoles::serial_screen::read_until: Matched output from SUT in 2 loops & 0.0002 seconds: # 
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4712] <<< backend::baseclass::type_string(text="x")
+[2030-01-01T10:00:03.000000Z] [debug] [pid:4711] >>> testapi::wait_serial: # : ok
+Use of uninitialized value in test code at tests/console/sshd.pm line 21.
+[2030-01-01T10:00:04.000000Z] [debug] [pid:4711] ||| finished sshd console (runtime: 3 s)

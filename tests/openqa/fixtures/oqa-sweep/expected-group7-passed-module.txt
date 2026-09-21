@@ -1,0 +1,8 @@
+host=https://openqa.example.org
+group=7 name="Example Rolling" build=20300102 version=Rolling total=40 passed=30 softfailed=3 failed=4 skipped=2 unfinished=1 labeled=1 commented=2 unreviewed=3 state=needs-review tag=published
+7101 textmode@64bit result=passed arch=x86_64 flavor=DVD hdd=exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2 parents=7100
+7102 mm-client@64bit-2G result=passed arch=x86_64 flavor=DVD hdd=exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2 parents=7100,7105
+7109 textmode@aarch64 result=passed arch=aarch64 flavor=DVD
+7110 textmode_softfail@64bit result=softfailed arch=x86_64 flavor=DVD hdd=exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2 parents=7100
+4 current passed or softfailed jobs with module zypper_up passed
+requests: 2

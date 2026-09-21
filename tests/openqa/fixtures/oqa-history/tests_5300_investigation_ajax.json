@@ -1,0 +1,10 @@
+{
+ "first_bad": {
+  "link": "/tests/5280",
+  "text": 5280,
+  "type": "link"
+ },
+ "last_good": "not found",
+ "needlegiturl": "https://git.example.org/needles/commit/",
+ "testgiturl": "https://git.example.org/tests/commit/"
+}

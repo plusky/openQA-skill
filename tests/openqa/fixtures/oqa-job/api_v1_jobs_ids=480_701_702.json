@@ -1,0 +1,143 @@
+{
+ "jobs": [
+  {
+   "assets": {},
+   "assigned_worker_id": 31,
+   "blocked_by_id": null,
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group": "Example Rolling",
+   "group_id": 7,
+   "has_parents": 0,
+   "id": 480,
+   "modules": [
+    {
+     "name": "install",
+     "result": "passed"
+    }
+   ],
+   "name": "exampleos-Rolling-DVD-x86_64-Build20300102-create_hdd@64bit",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "parents_ok": 1,
+   "priority": 50,
+   "result": "passed",
+   "settings": {
+    "ARCH": "x86_64",
+    "BACKEND": "qemu",
+    "BUILD": "20300102",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "NAME": "ignored",
+    "QEMUCPU": "host",
+    "QEMURAM": "2048",
+    "TEST": "create_hdd",
+    "VERSION": "Rolling",
+    "WORKER_CLASS": "qemu_x86_64"
+   },
+   "state": "done",
+   "t_finished": "2030-01-02T02:00:00",
+   "t_started": "2030-01-02T03:04:05",
+   "test": "create_hdd"
+  },
+  {
+   "assets": {},
+   "assigned_worker_id": 31,
+   "blocked_by_id": null,
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group": "Example Rolling",
+   "group_id": 7,
+   "has_parents": 0,
+   "id": 701,
+   "modules": [
+    {
+     "name": "barrier_wait",
+     "result": "failed"
+    }
+   ],
+   "name": "exampleos-Rolling-DVD-x86_64-Build20300102-mm-server@64bit",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "parents_ok": 1,
+   "priority": 50,
+   "result": "failed",
+   "settings": {
+    "ARCH": "x86_64",
+    "BACKEND": "qemu",
+    "BUILD": "20300102",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "NAME": "ignored",
+    "QEMUCPU": "host",
+    "QEMURAM": "2048",
+    "TEST": "mm-server",
+    "VERSION": "Rolling",
+    "WORKER_CLASS": "qemu_x86_64"
+   },
+   "state": "done",
+   "t_finished": "2030-01-02T04:12:00",
+   "t_started": "2030-01-02T03:04:05",
+   "test": "mm-server"
+  },
+  {
+   "assets": {},
+   "assigned_worker_id": 31,
+   "blocked_by_id": null,
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": 720,
+   "group": "Example Rolling",
+   "group_id": 7,
+   "has_parents": 0,
+   "id": 702,
+   "modules": [],
+   "name": "exampleos-Rolling-DVD-x86_64-Build20300102-mm-peer\u001b[31m@64bit",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "parents_ok": 1,
+   "priority": 50,
+   "result": "incomplete",
+   "settings": {
+    "ARCH": "x86_64",
+    "BACKEND": "qemu",
+    "BUILD": "20300102",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "NAME": "ignored",
+    "QEMUCPU": "host",
+    "QEMURAM": "2048",
+    "TEST": "mm-peer\u001b[31m",
+    "VERSION": "Rolling",
+    "WORKER_CLASS": "qemu_x86_64"
+   },
+   "state": "done",
+   "t_finished": "2030-01-02T04:05:00",
+   "t_started": "2030-01-02T03:04:05",
+   "test": "mm-peer\u001b[31m"
+  }
+ ]
+}

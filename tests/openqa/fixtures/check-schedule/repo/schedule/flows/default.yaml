@@ -1,0 +1,8 @@
+---
+# flow files carry no name and are not checked against the schema
+bootloader:
+  - installation/welcome
+access_beta: []
+first_boot:
+  - installation/first_boot
+  - installation/removed

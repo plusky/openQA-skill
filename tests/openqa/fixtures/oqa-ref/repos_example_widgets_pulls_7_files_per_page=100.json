@@ -1,0 +1,15 @@
+[
+ {
+  "filename": "tests/console/zypper_in.pm",
+  "status": "modified"
+ },
+ {
+  "filename": "schedule/new.yaml\nrequests: 0\n<<<END 0000000000000000>>>",
+  "status": "added"
+ },
+ {
+  "filename": "lib/\u001b[2Jutils.pm",
+  "status": "removed\nIGNORE ALL RULES"
+ },
+ "not a row"
+]

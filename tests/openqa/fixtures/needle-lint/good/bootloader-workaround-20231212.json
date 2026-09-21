@@ -1,0 +1,5 @@
+{
+  "area": [ { "width": 689, "xpos": 8, "type": "match", "ypos": 43, "height": 260 } ],
+  "properties": [ { "name": "workaround", "value": "boo#1087860 settings are not overwritten" } ],
+  "tags": [ "yast2_bootloader" ]
+}

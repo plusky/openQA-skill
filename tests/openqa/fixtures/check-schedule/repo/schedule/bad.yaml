@@ -1,0 +1,23 @@
+---
+name: something_else
+machine: 64bit
+vars:
+  HDD_1: disk.qcow2
+  WORKER_CLASS: qemu_x86_64
+  PUBLISH_HDD_2: out.qcow2
+  lower_case: 1
+  QEMURAM: 2048
+schedule:
+  - installation/welcome
+  - tests/console/sshd
+  - console/sshd.pm
+  - console/missing
+  - "{{nope}}"
+  - '{{branches}}'
+conditional_schedule:
+  branches:
+    ARCH:
+      x86_64:
+        - x11/game
+        - console/zypper_ref
+

@@ -1,0 +1,8 @@
+{
+  "area": [
+    { "xpos": 0, "ypos": 219, "width": 37, "height": 31, "type": "match", "match": 90, "margin": 100 },
+    { "xpos": 494, "ypos": 219, "width": 37, "height": 31, "type": "exclude" }
+  ],
+  "properties": [],
+  "tags": [ "grub2", "ENV-DISTRI-opensuse" ]
+}

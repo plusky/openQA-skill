@@ -1,0 +1,9 @@
+{
+  "area": [
+    { "xpos": 100, "ypos": 200, "width": 80, "height": 24, "type": "match",
+      "click_point": { "xpos": 34, "ypos": 11, "id": "ok" } },
+    { "xpos": 300, "ypos": 200, "width": 80, "height": 24, "type": "match",
+      "click_point": { "xpos": 40, "ypos": 12, "id": "cancel" } }
+  ],
+  "tags": [ "ok_button" ]
+}

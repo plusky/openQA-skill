@@ -1,0 +1,9 @@
+openqa-clone-job --within-instance https://openqa.opensuse.org/tests/4242 _GROUP=0 INCLUDE_MODULES=foo 'DESKTOP=text mode' QEMURAM= EXTRA+=,x WORKER_CLASS:client=w2 BUILD=poo123 'CASEDIR=https://github.com/alice/os-autoinst-distri-example.git#fix(foo)' SCHEDULE=console/foo,bar
+creates: clone of job 4242 on https://openqa.opensuse.org, outside any job group (no asset download, no missing-asset check)
+overrides: _GROUP BUILD CASEDIR SCHEDULE INCLUDE_MODULES DESKTOP EXTRA+= WORKER_CLASS:client; deletes: QEMURAM
+note: no NEEDLES_DIR: a custom CASEDIR still uses production needles
+hazard: ref has characters not allowed in TEST: no TEST+= suffix, clone shares the scenario history
+hazard: SCHEDULE: console/foo lacks the tests/ prefix (paths are relative to CASEDIR; only YAML schedules omit it); bare name bar needs an ASSET_<n>_URL sideload or a wheel; INCLUDE_MODULES is discarded
+hazard: parent publishes assets and --skip-chained-deps is missing: the cloned parent re-publishes the production file name
+hazard: openqa.opensuse.org is a production instance: shared workers, public results
+approval: running this posts jobs to https://openqa.opensuse.org, a write; get the user's approval first

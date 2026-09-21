@@ -1,0 +1,69 @@
+Synthetic answers for the offline tests. File name = _oqa.fixture_name(path, params);
+long names end in a hash of the full request, so this index says which request each file answers.
+
+api_v1_jobs_470.json
+    GET /api/v1/jobs/470
+api_v1_jobs_490.json
+    GET /api/v1/jobs/490
+api_v1_jobs_500.json
+    GET /api/v1/jobs/500
+api_v1_jobs_500_comments.json
+    GET /api/v1/jobs/500/comments
+api_v1_jobs_500_details.json
+    GET /api/v1/jobs/500/details
+api_v1_jobs_600_comments.json
+    GET /api/v1/jobs/600/comments
+api_v1_jobs_600_details.json
+    GET /api/v1/jobs/600/details
+api_v1_jobs_700_comments.json
+    GET /api/v1/jobs/700/comments
+api_v1_jobs_700_details.json
+    GET /api/v1/jobs/700/details
+api_v1_jobs_800.json
+    GET /api/v1/jobs/800
+api_v1_jobs_800_comments.json
+    GET /api/v1/jobs/800/comments
+api_v1_jobs_800_details.json
+    GET /api/v1/jobs/800/details
+api_v1_jobs_810.json
+    GET /api/v1/jobs/810
+api_v1_jobs_900.json
+    GET /api/v1/jobs/900
+api_v1_jobs_900_comments.json
+    GET /api/v1/jobs/900/comments
+api_v1_jobs_900_details
+    GET /api/v1/jobs/900/details
+api_v1_jobs_ids=480.json
+    GET /api/v1/jobs?ids=480
+api_v1_jobs_ids=480_701_702.json
+    GET /api/v1/jobs?ids=480,701,702
+api_v1_jobs_ids=900.json
+    GET /api/v1/jobs?ids=900
+api_v1_workers_31.json
+    GET /api/v1/workers/31
+tests_700_dependencies_ajax.json
+    GET /tests/700/dependencies_ajax
+api_v1_jobs_820.json
+    GET /api/v1/jobs/820
+api_v1_jobs_820_details.json
+    GET /api/v1/jobs/820/details
+api_v1_jobs_820_comments.json
+    GET /api/v1/jobs/820/comments
+api_v1_jobs_830_details.json
+    GET /api/v1/jobs/830/details (step number and similarity with 4000 digits)
+api_v1_jobs_830_comments.json
+    GET /api/v1/jobs/830/comments (carry-over origin with 5000 digits)
+api_v1_jobs_960_details.json
+    GET /api/v1/jobs/960/details (hostile screenshot, module and uploaded-log names)
+api_v1_jobs_960_comments.json
+    GET /api/v1/jobs/960/comments
+api_v1_jobs_940_details.json
+    GET /api/v1/jobs/940/details (clone chain that points back at itself)
+api_v1_jobs_940_comments.json
+    GET /api/v1/jobs/940/comments
+api_v1_jobs_940.json
+    GET /api/v1/jobs/940
+api_v1_jobs_941.json
+    GET /api/v1/jobs/941
+api_v1_jobs_942.json
+    GET /api/v1/jobs/942

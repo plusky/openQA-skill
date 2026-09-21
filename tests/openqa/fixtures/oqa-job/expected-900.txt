@@ -1,0 +1,10 @@
+job=900 host=https://openqa.example.org result=failed worker=#404 started=2030-01-02T03:04:05 duration=1h06m
+scenario=exampleos-Rolling-DVD-x86_64-kde@64bit build=20300102 group=7
+note: details unusable or too large: module results only, no steps
+settings: BACKEND=qemu QEMUCPU=host QEMURAM=2048
+modules=2 failed=1 passed=1
+module=plasma result=failed
+  steps not available link=https://openqa.example.org/tests/900#step/plasma/1
+logs=? (not in this answer: oqa-log.py --list)
+review: reviewed=no comments=0
+requests: 5

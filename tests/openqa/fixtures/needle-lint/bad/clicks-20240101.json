@@ -1,0 +1,8 @@
+{
+  "area": [
+    { "xpos": 1, "ypos": 1, "width": 5, "height": 5, "type": "match", "click_point": { "xpos": 0, "ypos": 3 } },
+    { "xpos": 9, "ypos": 1, "width": 5, "height": 5, "type": "match", "click_point": { "xpos": 2, "ypos": 3, "id": "b" } },
+    { "xpos": 9, "ypos": 9, "width": 5, "height": 5, "click_point": "middle" }
+  ],
+  "tags": [ "clicks" ]
+}

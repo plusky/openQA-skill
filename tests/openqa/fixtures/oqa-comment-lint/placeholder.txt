@@ -1,0 +1,3 @@
+epiphany: poo#<id> crashes on start
+finish_desktop: <poo#id or boo#id>, also bsc#N, boo#TBD and gh#os-autoinst/os-autoinst#<n>
+real ones: gh#os-autoinst/os-autoinst#123 jsc#PED-123 poo#12345

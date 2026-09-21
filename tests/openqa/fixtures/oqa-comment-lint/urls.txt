@@ -1,0 +1,2 @@
+https://progress.opensuse.org/issues/424242 and (https://bugzilla.opensuse.org/show_bug.cgi?id=1000001)
+see http://tracker.corp/ticket/5 and https://192.168.1.10/x and https://gitlab.devel.example/x

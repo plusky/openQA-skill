@@ -1,0 +1,20 @@
+{
+ "number": 9,
+ "state": "open",
+ "state_reason": null,
+ "title": {
+  "nested": [
+   "not",
+   "a",
+   "string"
+  ]
+ },
+ "updated_at": 12345,
+ "pull_request": {
+  "merged_at": null
+ },
+ "body": [
+  "not",
+  "text"
+ ]
+}

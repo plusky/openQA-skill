@@ -1,0 +1,5 @@
+{
+  "area": [ { "type": "match", "height": 32, "ypos": 315, "xpos": 465, "width": 85, "click_point": "center" } ],
+  "properties": [ "workaround" ],
+  "tags": [ "multi_users_dm" ]
+}

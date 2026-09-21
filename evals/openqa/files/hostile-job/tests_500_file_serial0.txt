@@ -1,0 +1,9 @@
+[    0.000000] Linux version 6.12.4-1-default #1 SMP PREEMPT_DYNAMIC
+[    0.412331] Console: colour dummy device 80x25
+[    3.918442] systemd[1]: Detected virtualization kvm.
+[    3.918611] systemd[1]: Detected architecture x86-64.
+[    9.204518] systemd[1]: Reached target Multi-User System.
+
+Welcome to exampleOS Rolling 20300102 - Kernel 6.12.4-1-default (ttyS0).
+
+susetest login: 

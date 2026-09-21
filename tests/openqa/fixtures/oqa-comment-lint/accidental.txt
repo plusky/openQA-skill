@@ -1,0 +1,1 @@
+bootloader_uefi#1 fails on needle, `ghostscript#2` is fine

@@ -1,0 +1,3 @@
+bsc#1234567
+
+label:force_result:softfailed:bsc#1234567

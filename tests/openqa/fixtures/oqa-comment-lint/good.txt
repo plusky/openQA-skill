@@ -1,0 +1,1 @@
+boo#1000001 zypper_in: apache2 install fails with code 4

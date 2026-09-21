@@ -1,0 +1,107 @@
+{
+ "jobs": [
+  {
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group_id": 8,
+   "id": 8003,
+   "modules": [],
+   "name": "exampleos-9.9-DVD-x86_64-Build88.1-minimal@64bit",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "result": "incomplete",
+   "settings": {
+    "ARCH": "x86_64",
+    "BUILD": "88.1",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "TEST": "minimal",
+    "VERSION": "9.9"
+   },
+   "state": "done",
+   "test": "minimal"
+  },
+  {
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group_id": 8,
+   "id": 8001,
+   "modules": [
+    {
+     "category": "x",
+     "flags": [],
+     "name": "boot",
+     "result": "passed"
+    },
+    {
+     "category": "x",
+     "flags": [],
+     "name": "zypper_up",
+     "result": "failed"
+    }
+   ],
+   "name": "exampleos-9.9-DVD-x86_64-Build88.1-textmode@64bit",
+   "origin_id": 7990,
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "result": "failed",
+   "settings": {
+    "ARCH": "x86_64",
+    "BUILD": "88.1",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "TEST": "textmode",
+    "VERSION": "9.9"
+   },
+   "state": "done",
+   "test": "textmode"
+  },
+  {
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group_id": 8,
+   "id": 8002,
+   "modules": [],
+   "name": "exampleos-9.9-DVD-x86_64-Build88.1-mm-client@64bit-2G",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": [
+     8001
+    ]
+   },
+   "result": "parallel_failed",
+   "settings": {
+    "ARCH": "x86_64",
+    "BUILD": "88.1",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit-2G",
+    "TEST": "mm-client",
+    "VERSION": "9.9"
+   },
+   "state": "done",
+   "test": "mm-client"
+  }
+ ]
+}

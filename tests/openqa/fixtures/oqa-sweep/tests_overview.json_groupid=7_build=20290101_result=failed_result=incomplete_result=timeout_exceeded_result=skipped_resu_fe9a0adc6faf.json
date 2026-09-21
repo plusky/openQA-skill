@@ -1,0 +1,15 @@
+{
+ "aggregate_status": "failed",
+ "build": "20290101",
+ "distri": "exampleos",
+ "job_ids": [],
+ "limit_exceeded": 0,
+ "results": {
+  "exampleos": {
+   "Rolling": {
+    "DVD": {}
+   }
+  }
+ },
+ "version": "Rolling"
+}

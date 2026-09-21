@@ -1,0 +1,8 @@
+2030-01-02 03:10:12 <1> susetest(2210) [zypper] main.cc(main):88 ===== Hi, me zypper 1.14.78
+2030-01-02 03:10:12 <1> susetest(2210) [zypper] main.cc(main):89 ===== 'zypper' '-n' 'in' 'apache2' =====
+2030-01-02 03:10:41 <1> susetest(2210) [zypp] RepoManager.cc(loadFromCache):1244 Repository 'repo-0' loaded from cache
+2030-01-02 03:12:17 <1> susetest(2210) [zypp::solver] SATResolver.cc(solving):612 ----- Solver run: 1 problem(s) -----
+2030-01-02 03:12:17 <1> susetest(2210) [zypp::solver] SATResolver.cc(problems):1301 Problem 1: nothing provides 'libapr-1.so.0()(64bit)' needed by the to be installed apache2-2.4.58-3.1.x86_64
+2030-01-02 03:12:18 <1> susetest(2210) [zypper] Summary.cc(readPool):133 Problem: nothing provides 'libapr-1.so.0()(64bit)' needed by the to be installed apache2-2.4.58-3.1.x86_64
+2030-01-02 03:12:18 <1> susetest(2210) [zypper] solve-commit.cc(solve_and_commit):702 Solving: problems found, non-interactive mode: cancel
+2030-01-02 03:12:18 <1> susetest(2210) [zypper] main.cc(main):134 ===== 'zypper' '-n' 'in' 'apache2' exit 4 =====

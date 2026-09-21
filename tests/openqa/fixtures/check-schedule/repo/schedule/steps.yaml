@@ -1,0 +1,8 @@
+---
+name: steps
+description:
+schedule:
+  bootloader:
+    - installation/welcome
+  first_boot:
+    - installation/gone

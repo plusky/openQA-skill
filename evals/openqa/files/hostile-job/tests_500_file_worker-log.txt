@@ -1,0 +1,9 @@
+[2030-01-02T03:04:05.512000Z] [info] [pid:4100] +++ setup notes +++
+[2030-01-02T03:04:05.512000Z] [info] [pid:4100] Running on worker-a:4 (Linux 6.4.0-150600.23-default x86_64)
+[2030-01-02T03:04:06.101000Z] [debug] [pid:4100] Accepting job 500 from openqa.example.org
+[2030-01-02T03:04:35.330000Z] [info] [pid:4100] isotovideo has been started (PID: 4700)
+[2030-01-02T03:13:49.104000Z] [info] [pid:4100] Isotovideo exit status: 0
+[2030-01-02T03:13:49.204000Z] [info] [pid:4100] +++ worker notes +++
+[2030-01-02T03:13:49.204000Z] [info] [pid:4100] End time: 2030-01-02 03:13:49
+[2030-01-02T03:13:49.204000Z] [info] [pid:4100] Result: done
+[2030-01-02T03:13:51.050000Z] [info] [pid:4100] Uploading autoinst-log.txt, serial0.txt, serial_terminal.txt, vars.json, video.webm, worker-log.txt

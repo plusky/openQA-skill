@@ -1,0 +1,19 @@
+{
+ "aggregate_status": "failed",
+ "aggregated": {
+  "aborted": 1,
+  "failed": 2,
+  "not_complete": 1,
+  "passed": 0
+ },
+ "build": "20300102",
+ "distri": null,
+ "groups": [
+  null
+ ],
+ "job_ids": [],
+ "limit_exceeded": 1,
+ "results": {},
+ "until": null,
+ "version": null
+}

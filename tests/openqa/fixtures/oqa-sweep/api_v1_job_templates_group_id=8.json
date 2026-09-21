@@ -1,0 +1,25 @@
+{
+ "JobTemplates": [
+  {
+   "id": 9,
+   "prio": 50,
+   "group_name": "Example Stable",
+   "product": {
+    "id": 9,
+    "arch": "x86_64",
+    "distri": "exampleos",
+    "flavor": "DVD",
+    "group": "x",
+    "version": "9.9"
+   },
+   "machine": {
+    "id": 9,
+    "name": "64bit"
+   },
+   "test_suite": {
+    "id": 9,
+    "name": "extra_utils"
+   }
+  }
+ ]
+}

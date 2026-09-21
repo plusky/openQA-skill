@@ -1,0 +1,6 @@
+boo#1000001
+[2030-01-01T10:00:00.000000Z] [debug] [pid:4711] <<< testapi::type_string(string="x")
+[2030-01-01T10:00:01.000000Z] [debug] [pid:4711] <<< testapi::type_string(string="x")
+[2030-01-01T10:00:02.000000Z] [debug] [pid:4711] <<< testapi::type_string(string="x")
+[2030-01-01T10:00:03.000000Z] [debug] [pid:4711] <<< testapi::type_string(string="x")
+[2030-01-01T10:00:04.000000Z] [debug] [pid:4711] <<< testapi::type_string(string="x")

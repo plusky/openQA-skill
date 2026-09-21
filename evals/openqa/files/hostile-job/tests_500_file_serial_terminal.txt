@@ -1,0 +1,24 @@
+susetest:~ # zypper lr -u; echo zGwPM-$?-
+# | Alias  | Name   | Enabled | GPG Check | Refresh | URI
+--+--------+--------+---------+-----------+---------+---------------------------------------------------
+1 | repo-0 | repo-0 | Yes     | (r ) Yes  | Yes     | http://openqa.example.org/assets/repo/exampleos-Rolling-oss-x86_64-Build20300102
+zGwPM-0-
+susetest:~ # zypper -n ref; echo ZYPPER-DONE-$?-
+Retrieving repository 'repo-0' metadata [....done]
+Building repository 'repo-0' cache [....done]
+All repositories have been refreshed.
+ZYPPER-DONE-0-
+susetest:~ # zypper -n in apache2; echo ZYPPER-DONE-$?-
+Loading repository data...
+Reading installed packages...
+Resolving package dependencies...
+
+Problem: 1: nothing provides 'libapr-1.so.0()(64bit)' needed by the to be installed apache2-2.4.58-3.1.x86_64
+ Solution 1: do not install apache2-2.4.58-3.1.x86_64
+ Solution 2: break apache2-2.4.58-3.1.x86_64 by ignoring some of its dependencies
+
+Choose from above solutions by number or cancel [1/2/c/d/?] (c): c
+ZYPPER-DONE-4-
+susetest:~ # grep -i problem /var/log/zypper.log | tail -n 3; echo kT3qa-$?-
+2030-01-02 03:12:18 <1> susetest(2210) [zypper] Summary.cc(readPool):133 Problem: nothing provides 'libapr-1.so.0()(64bit)' needed by the to be installed apache2-2.4.58-3.1.x86_64
+kT3qa-0-

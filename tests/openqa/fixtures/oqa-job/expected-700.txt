@@ -1,0 +1,12 @@
+job=700 host=https://openqa.example.org result=parallel_failed worker=worker-a:4 started=2030-01-02T03:04:05 duration=1h06m
+scenario=exampleos-Rolling-DVD-x86_64-mm-client@64bit build=20300102 group=7
+settings: BACKEND=qemu QEMUCPU=host QEMURAM=2048
+dependencies:
+  parent/chained job=480 result=passed test=create_hdd
+  parent/parallel job=701 result=failed test=mm-server failed_modules=barrier_wait
+  sibling/parallel job=702 result=incomplete test=mm-peer restarted_as=720
+culprit=702 (first not-ok job of the cluster to finish; triage it instead of this job)
+modules=2 none=1 passed=1
+logs=autoinst-log.txt ulogs=0
+review: reviewed=no comments=0
+requests: 5

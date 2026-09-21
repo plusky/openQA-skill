@@ -1,0 +1,14 @@
+{
+ "faults": [],
+ "bugs": [
+  {
+   "id": 1000002,
+   "summary": "installer hangs",
+   "status": "NEW",
+   "resolution": "",
+   "is_open": true,
+   "dupe_of": "https://evil.example.net/",
+   "last_change_time": "2030-01-03T03:04:05Z"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "build_results": [
+  {
+   "all_passed": 0,
+   "build": "88.1",
+   "commented": 0,
+   "comments": 2,
+   "date": "2030-01-02T03:04:05",
+   "distris": {
+    "exampleos": 1
+   },
+   "escaped_build": "88.1",
+   "escaped_id": "9.9-88.1",
+   "escaped_version": "9.9",
+   "failed": 3,
+   "key": "9.9-88.1",
+   "labeled": 1,
+   "passed": 30,
+   "reviewed": 0,
+   "skipped": 2,
+   "softfailed": 3,
+   "tag": null,
+   "total": 40,
+   "unfinished": 1,
+   "version": "9.9",
+   "version_count": 1
+  }
+ ],
+ "children": [],
+ "group": {
+  "id": 8,
+  "name": "Example Stable"
+ },
+ "limit_exceeded": 0
+}

@@ -1,0 +1,13 @@
+{
+ "issue": {
+  "id": 6,
+  "subject": "old ticket",
+  "status": {
+   "id": 5,
+   "name": "Rejected",
+   "is_closed": true
+  },
+  "updated_on": "2029-01-07T08:00:00Z",
+  "description": ""
+ }
+}

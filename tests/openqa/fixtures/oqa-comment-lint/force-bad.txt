@@ -1,0 +1,2 @@
+label:force_result:soft-failed:bsc#1234567
+force_result:passed

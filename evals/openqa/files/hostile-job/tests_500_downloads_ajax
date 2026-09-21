@@ -1,0 +1,25 @@
+
+<h5>Result files</h5>
+<ul class="resultfile-list">
+    <li><i class="fa-regular fa-file-video"></i><a href="/tests/500/video?filename=video.webm">Video</a>
+        <a href="/tests/500/file/video.webm" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=autoinst-log.txt">autoinst-log.txt</a>
+        <a href="/tests/500/file/autoinst-log.txt" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=worker-log.txt">worker-log.txt</a>
+        <a href="/tests/500/file/worker-log.txt" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=vars.json">vars.json</a>
+        <a href="/tests/500/file/vars.json" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=serial0.txt">serial0.txt</a>
+        <a href="/tests/500/file/serial0.txt" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=serial_terminal.txt">serial_terminal.txt</a>
+        <a href="/tests/500/file/serial_terminal.txt" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+</ul>
+<h6>Uploaded logs</h6>
+<ul class="resultfile-list">
+    <li><a href="/tests/500/logfile?filename=zypper_in-zypper.log">zypper_in-zypper.log</a>
+        <a href="/tests/500/file/zypper_in-zypper.log" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/500/logfile?filename=zypper_in-journal.log">zypper_in-journal.log</a>
+        <a href="/tests/500/file/zypper_in-journal.log" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+</ul>
+<h5>Assets</h5>
+<ul id="asset-list"><li><a href="/tests/500/asset/hdd/exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2">exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2</a></li></ul>

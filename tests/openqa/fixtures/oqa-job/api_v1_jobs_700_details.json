@@ -1,0 +1,95 @@
+{
+ "job": {
+  "assets": {},
+  "assigned_worker_id": 31,
+  "blocked_by_id": null,
+  "children": {
+   "Chained": [],
+   "Directly chained": [],
+   "Parallel": []
+  },
+  "clone_id": null,
+  "group": "Example Rolling",
+  "group_id": 7,
+  "has_parents": 1,
+  "id": 700,
+  "logs": [
+   "autoinst-log.txt"
+  ],
+  "name": "exampleos-Rolling-DVD-x86_64-Build20300102-mm-client@64bit",
+  "parents": {
+   "Chained": [
+    480
+   ],
+   "Directly chained": [],
+   "Parallel": [
+    701
+   ]
+  },
+  "parents_ok": 0,
+  "priority": 50,
+  "result": "parallel_failed",
+  "settings": {
+   "ARCH": "x86_64",
+   "BACKEND": "qemu",
+   "BUILD": "20300102",
+   "DISTRI": "exampleos",
+   "FLAVOR": "DVD",
+   "MACHINE": "64bit",
+   "NAME": "ignored",
+   "QEMUCPU": "host",
+   "QEMURAM": "2048",
+   "TEST": "mm-client",
+   "VERSION": "Rolling",
+   "WORKER_CLASS": "qemu_x86_64"
+  },
+  "state": "done",
+  "t_finished": "2030-01-02T04:10:30",
+  "t_started": "2030-01-02T03:04:05",
+  "test": "mm-client",
+  "testresults": [
+   {
+    "always_rollback": 0,
+    "always_run": 0,
+    "category": "console",
+    "details": [
+     {
+      "display_title": "",
+      "frametime": [
+       "1.0",
+       "1.1"
+      ],
+      "is_parser_text_result": 0,
+      "md5_basename": "00000000000000000000000000.png",
+      "md5_dirname": "abc/def",
+      "num": 1,
+      "resborder": "resborder_ok",
+      "result": "ok",
+      "screenshot": "m-1.png"
+     }
+    ],
+    "execution_time": "1m",
+    "fatal": 0,
+    "has_parser_text_result": 0,
+    "important": 0,
+    "milestone": 0,
+    "name": "boot",
+    "result": "passed"
+   },
+   {
+    "always_rollback": 0,
+    "always_run": 0,
+    "category": "console",
+    "details": [],
+    "execution_time": "1m",
+    "fatal": 0,
+    "has_parser_text_result": 0,
+    "important": 0,
+    "milestone": 0,
+    "name": "client",
+    "result": "none"
+   }
+  ],
+  "ulogs": []
+ }
+}

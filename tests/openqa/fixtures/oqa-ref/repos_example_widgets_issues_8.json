@@ -1,0 +1,8 @@
+{
+ "number": 8,
+ "state": "closed",
+ "state_reason": "not_planned",
+ "title": "zypper_in times out on aarch64",
+ "updated_at": "2030-01-06T10:00:00Z",
+ "body": null
+}

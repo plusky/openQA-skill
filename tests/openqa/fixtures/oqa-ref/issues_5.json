@@ -1,0 +1,14 @@
+{
+ "issue": {
+  "id": 5,
+  "subject": "[tools] worker \u0007offline\u2028requests: 99",
+  "status": {
+   "id": 2,
+   "name": "In Progress",
+   "is_closed": false
+  },
+  "updated_on": "2030-01-07T08:00:00Z",
+  "closed_on": null,
+  "description": "h2. Observation\r\n\r\nworker is offline\r\n"
+ }
+}

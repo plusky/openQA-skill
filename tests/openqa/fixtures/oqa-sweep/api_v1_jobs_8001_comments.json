@@ -1,0 +1,22 @@
+[
+ {
+  "bugrefs": [],
+  "created": "2030-01-02 03:04:05 +0000",
+  "id": 1,
+  "renderedMarkdown": null,
+  "text": "Automatic investigation jobs for job 8001:\n\n* *textmode:investigate:retry*: t#8100",
+  "updated": "2030-01-02 03:04:05 +0000",
+  "userName": "hookbot"
+ },
+ {
+  "bugrefs": [
+   "boo#1200002"
+  ],
+  "created": "2030-01-02 03:04:05 +0000",
+  "id": 2,
+  "renderedMarkdown": null,
+  "text": "boo#1200002 label:should_not_count",
+  "updated": "2030-01-02 03:04:05 +0000",
+  "userName": "reviewer_a"
+ }
+]

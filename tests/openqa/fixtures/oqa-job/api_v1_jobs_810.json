@@ -1,0 +1,45 @@
+{
+ "job": {
+  "assets": {},
+  "assigned_worker_id": 31,
+  "blocked_by_id": null,
+  "children": {
+   "Chained": [],
+   "Directly chained": [],
+   "Parallel": []
+  },
+  "clone_id": null,
+  "group": "Example Rolling",
+  "group_id": 7,
+  "has_parents": 0,
+  "id": 810,
+  "name": "exampleos-Rolling-DVD-x86_64-Build20300102-gnome@64bit",
+  "origin_id": 800,
+  "parents": {
+   "Chained": [],
+   "Directly chained": [],
+   "Parallel": []
+  },
+  "parents_ok": 1,
+  "priority": 50,
+  "result": "none",
+  "settings": {
+   "ARCH": "x86_64",
+   "BACKEND": "qemu",
+   "BUILD": "20300102",
+   "DISTRI": "exampleos",
+   "FLAVOR": "DVD",
+   "MACHINE": "64bit",
+   "NAME": "ignored",
+   "QEMUCPU": "host",
+   "QEMURAM": "2048",
+   "TEST": "gnome",
+   "VERSION": "Rolling",
+   "WORKER_CLASS": "qemu_x86_64"
+  },
+  "state": "running",
+  "t_finished": null,
+  "t_started": "2030-01-02T03:04:05",
+  "test": "gnome"
+ }
+}

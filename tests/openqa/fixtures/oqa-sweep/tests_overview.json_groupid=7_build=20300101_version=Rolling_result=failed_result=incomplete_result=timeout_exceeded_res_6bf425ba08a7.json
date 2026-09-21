@@ -1,0 +1,41 @@
+{
+ "aggregate_status": "failed",
+ "build": "20300101",
+ "distri": "exampleos",
+ "job_ids": [
+  6990
+ ],
+ "limit_exceeded": 0,
+ "results": {
+  "exampleos": {
+   "Rolling": {
+    "DVD": {
+     "gnome": {
+      "description": "",
+      "x86_64": {
+       "bugdetails": null,
+       "bugs": {
+        "boo#1200001": 1
+       },
+       "comments": 0,
+       "dep_count": 0,
+       "deps": "{\"children\": {\"Chained\": [], \"Directly chained\": [], \"Parallel\": []}, \"has_parents\": 0, \"parents\": {\"Chained\": [], \"Directly chained\": [], \"Parallel\": []}, \"parents_ok\": 1}",
+       "failed": 1,
+       "failures": [
+        "firefox"
+       ],
+       "jobid": 6990,
+       "label": null,
+       "overall": "failed",
+       "passed": 3,
+       "restarts": 0,
+       "state": "done",
+       "unknown": 0
+      }
+     }
+    }
+   }
+  }
+ },
+ "version": "Rolling"
+}

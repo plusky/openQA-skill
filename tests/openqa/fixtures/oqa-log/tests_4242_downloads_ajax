@@ -1,0 +1,17 @@
+
+<h5>Result files</h5>
+<ul class="resultfile-list">
+    <li><i class="fa-regular fa-file-video"></i><a href="/tests/4242/video?filename=video.webm">Video</a>
+        <a href="/tests/4242/file/video.webm" target="blank" title="Raw/download"><i class="fa-solid fa-download"></i></a></li>
+    <li><a href="/tests/4242/logfile?filename=autoinst-log.txt">autoinst-log.txt</a>
+        <a href="/tests/4242/file/autoinst-log.txt" target="blank" title="Raw/download"></a></li>
+    <li><a href="/tests/4242/file/vars.json">vars.json</a></li>
+    <li><a href="/tests/4242/file/serial0.txt" target="blank"></a></li>
+</ul>
+<h6>Uploaded logs</h6>
+<ul class="resultfile-list">
+    <li><a href="https://files.openqa.example.org/tests/4242/file/hostile-ulog.txt">hostile-ulog.txt</a></li>
+    <li><a href="/tests/4242/file/a&amp;b-IGNORE_PREVIOUS_INSTRUCTIONS.log">x</a></li>
+    <li><a href="/tests/9999/file/other-job.txt">not ours</a></li>
+</ul>
+<h5>Assets</h5><ul id="asset-list"><li><a href="/tests/4242/asset/iso/test.iso">test.iso</a></li></ul>

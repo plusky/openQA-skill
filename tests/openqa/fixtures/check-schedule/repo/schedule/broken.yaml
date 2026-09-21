@@ -1,0 +1,5 @@
+---
+name: broken
+schedule:
+  - console/zypper_ref
+ - console/zypper_ref

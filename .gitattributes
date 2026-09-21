@@ -1,0 +1,3 @@
+# Fixtures reproduce what a server really sent, CRLF and odd bytes included: never normalise them.
+tests/openqa/fixtures/** -text
+evals/openqa/files/** -text

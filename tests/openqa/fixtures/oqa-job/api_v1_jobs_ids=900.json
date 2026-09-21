@@ -1,0 +1,56 @@
+{
+ "jobs": [
+  {
+   "assets": {},
+   "assigned_worker_id": 404,
+   "blocked_by_id": null,
+   "children": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "clone_id": null,
+   "group": "Example Rolling",
+   "group_id": 7,
+   "has_parents": 0,
+   "id": 900,
+   "modules": [
+    {
+     "name": "boot",
+     "result": "passed"
+    },
+    {
+     "name": "plasma",
+     "result": "failed"
+    }
+   ],
+   "name": "exampleos-Rolling-DVD-x86_64-Build20300102-kde@64bit",
+   "parents": {
+    "Chained": [],
+    "Directly chained": [],
+    "Parallel": []
+   },
+   "parents_ok": 1,
+   "priority": 50,
+   "result": "failed",
+   "settings": {
+    "ARCH": "x86_64",
+    "BACKEND": "qemu",
+    "BUILD": "20300102",
+    "DISTRI": "exampleos",
+    "FLAVOR": "DVD",
+    "MACHINE": "64bit",
+    "NAME": "ignored",
+    "QEMUCPU": "host",
+    "QEMURAM": "2048",
+    "TEST": "kde",
+    "VERSION": "Rolling",
+    "WORKER_CLASS": "qemu_x86_64"
+   },
+   "state": "done",
+   "t_finished": "2030-01-02T04:10:30",
+   "t_started": "2030-01-02T03:04:05",
+   "test": "kde"
+  }
+ ]
+}

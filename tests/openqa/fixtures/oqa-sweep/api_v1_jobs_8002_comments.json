@@ -1,0 +1,20 @@
+[
+ {
+  "bugrefs": [],
+  "created": "2030-01-02 03:04:05 +0000",
+  "id": 3,
+  "renderedMarkdown": null,
+  "text": "label:old_label",
+  "updated": "2030-01-02 03:04:05 +0000",
+  "userName": "reviewer_b"
+ },
+ {
+  "bugrefs": [],
+  "created": "2030-01-02 03:04:05 +0000",
+  "id": 4,
+  "renderedMarkdown": null,
+  "text": "see label:\u001b[5mmm_victim now",
+  "updated": "2030-01-02 03:04:05 +0000",
+  "userName": "reviewer_b"
+ }
+]

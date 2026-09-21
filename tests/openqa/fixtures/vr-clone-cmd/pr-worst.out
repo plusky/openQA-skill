@@ -1,0 +1,9 @@
+openqa-clone-custom-git-refspec --clone-job-args=--export-command https://github.com/os-autoinst/os-autoinst-distri-opensuse/pull/1 https://openqa.suse.de/tests/77 _GROUP=0 BUILD=poo123 'NEEDLES_DIR=https://github.com/bob/os-autoinst-needles-opensuse.git#nb' SCHEDULE=console/foo WORKER_CLASS:client=w2
+creates: clone of job 77 on https://openqa.suse.de, outside any job group (helper adds --skip-chained-deps --parental-inheritance --within-instance)
+overrides: _GROUP BUILD NEEDLES_DIR SCHEDULE WORKER_CLASS:client (helper derives TEST+= CASEDIR PRODUCTDIR)
+note: helper never sets NEEDLES_DIR; it is passed as an extra argument
+note: an '@openqa: Clone <url>' line in the PR body replaces the --job URL (helper reads the PR)
+hazard: SCHEDULE: console/foo lacks the tests/ prefix (paths are relative to CASEDIR; only YAML schedules omit it)
+hazard: KEY:<TEST>= runs after the helper's TEST+=, so the scope must name the suffixed TEST
+hazard: openqa.suse.de is a production instance: shared workers, public results
+approval: --export-command only reads and prints; without it this is a write needing approval

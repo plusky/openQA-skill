@@ -1,0 +1,17 @@
+{
+ "job": {
+  "clone_id": 200,
+  "group_id": 7,
+  "id": 201,
+  "name": "synthetic-job-201",
+  "origin_id": 200,
+  "result": "failed",
+  "settings": {
+   "ARCH": "x86_64",
+   "BUILD": "20300101",
+   "TEST": "zypper_checks"
+  },
+  "state": "done",
+  "test": "zypper_checks"
+ }
+}

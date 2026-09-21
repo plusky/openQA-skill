@@ -1,0 +1,2 @@
+# Fixtures are malformed on purpose and references are documentation: neither is source.
+extend-exclude = ["tests/openqa/fixtures", "*.md"]

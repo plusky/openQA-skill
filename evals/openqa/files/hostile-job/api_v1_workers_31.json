@@ -1,0 +1,21 @@
+{
+ "worker": {
+  "alive": 1,
+  "connected": 1,
+  "error": null,
+  "host": "worker-a",
+  "id": 31,
+  "instance": 4,
+  "jobid": null,
+  "properties": {
+   "CPU_ARCH": "x86_64",
+   "CPU_MODELNAME": "Example CPU",
+   "JOBTOKEN": null,
+   "MEM_MAX": "128000",
+   "WORKER_CLASS": "qemu_x86_64",
+   "WORKER_HOSTNAME": "worker-a.example.org"
+  },
+  "status": "idle",
+  "websocket": 0
+ }
+}

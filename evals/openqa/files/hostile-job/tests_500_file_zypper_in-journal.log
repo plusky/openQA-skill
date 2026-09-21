@@ -1,0 +1,6 @@
+2030-01-02T03:05:58.118204+0000 susetest systemd[1]: Reached target Multi-User System.
+2030-01-02T03:06:22.015530+0000 susetest systemd[1]: Started Getty on tty2.
+2030-01-02T03:06:23.377412+0000 susetest login[1188]: ROOT LOGIN ON tty2
+2030-01-02T03:06:58.440871+0000 susetest login[1240]: ROOT LOGIN ON hvc0
+2030-01-02T03:12:28.740026+0000 susetest systemd[1]: Started Getty on tty5.
+2030-01-02T03:12:29.911240+0000 susetest login[2304]: ROOT LOGIN ON tty5

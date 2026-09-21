@@ -1,0 +1,6 @@
+openqa-clone-custom-git-refspec https://github.com/os-autoinst/os-autoinst-distri-opensuse/pull/6529 https://openqa.example.org/tests/4242 _GROUP=0
+creates: clone of job 4242 on https://openqa.example.org, outside any job group (helper adds --skip-chained-deps --parental-inheritance --within-instance)
+overrides: _GROUP (helper derives TEST+= BUILD CASEDIR PRODUCTDIR)
+note: helper never sets NEEDLES_DIR; production needles are used
+note: an '@openqa: Clone <url>' line in the PR body replaces the --job URL (helper reads the PR)
+approval: running this posts jobs to https://openqa.example.org, a write; get the user's approval first

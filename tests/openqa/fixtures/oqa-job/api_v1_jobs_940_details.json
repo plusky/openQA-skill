@@ -1,0 +1,33 @@
+{
+ "job": {
+  "state": "done",
+  "result": "failed",
+  "test": "loop",
+  "settings": {
+   "DISTRI": "exampleos",
+   "VERSION": "Rolling",
+   "FLAVOR": "DVD",
+   "ARCH": "x86_64",
+   "TEST": "loop",
+   "MACHINE": "64bit"
+  },
+  "t_started": "2030-01-02T03:04:05",
+  "t_finished": "2030-01-02T03:14:05",
+  "id": 940,
+  "origin_id": 942,
+  "clone_id": 941,
+  "logs": [],
+  "ulogs": [],
+  "testresults": [],
+  "parents": {
+   "Chained": [],
+   "Directly chained": [],
+   "Parallel": []
+  },
+  "children": {
+   "Chained": [],
+   "Directly chained": [],
+   "Parallel": []
+  }
+ }
+}

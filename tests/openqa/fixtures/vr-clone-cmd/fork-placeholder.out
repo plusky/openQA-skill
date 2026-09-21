@@ -1,0 +1,5 @@
+openqa-clone-job --within-instance https://openqa.example.org/tests/4242 _GROUP=0 'BUILD=<user>/os-autoinst-distri-opensuse#<branch>' 'TEST+=@<user>/os-autoinst-distri-opensuse#<branch>' 'CASEDIR=https://github.com/<user>/os-autoinst-distri-opensuse.git#<branch>' 'NEEDLES_DIR=https://github.com/<user>/os-autoinst-needles-opensuse.git#<branch>'
+creates: clone of job 4242 on https://openqa.example.org, outside any job group (no asset download, no missing-asset check)
+overrides: _GROUP BUILD TEST+= CASEDIR NEEDLES_DIR
+note: replace <user>/<branch> before running
+approval: running this posts jobs to https://openqa.example.org, a write; get the user's approval first

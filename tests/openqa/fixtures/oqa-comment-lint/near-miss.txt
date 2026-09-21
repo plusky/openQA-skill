@@ -1,0 +1,1 @@
+zypper fails, see (bsc#1234567) and "poo#424242", also BSC#7654321, bug#123456 and bsc 1234567

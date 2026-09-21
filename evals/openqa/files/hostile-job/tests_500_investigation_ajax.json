@@ -1,0 +1,17 @@
+{
+ "diff_packages_to_last_good": "Diff of packages not available",
+ "diff_sut_packages_to_last_good": "Diff of SUT packages not available",
+ "diff_to_last_good": "-   \"BUILD\" : \"20300101\",\n+   \"BUILD\" : \"20300102\",\n-   \"HDD_1\" : \"exampleos-Rolling-x86_64-20300101-textmode@64bit.qcow2\",\n+   \"HDD_1\" : \"exampleos-Rolling-x86_64-20300102-textmode@64bit.qcow2\",\n-   \"NAME\" : \"00000460-exampleos-Rolling-DVD-x86_64-Build20300101-textmode@64bit\",\n+   \"NAME\" : \"00000500-exampleos-Rolling-DVD-x86_64-Build20300102-textmode@64bit\",\n-   \"QEMUPORT\" : \"20032\",\n+   \"QEMUPORT\" : \"20042\",\n-   \"REPO_0\" : \"exampleos-Rolling-oss-x86_64-Build20300101\",\n+   \"REPO_0\" : \"exampleos-Rolling-oss-x86_64-Build20300102\",\n-   \"VNC\" : \"93\",\n+   \"VNC\" : \"94\",\n-   \"WORKER_INSTANCE\" : \"3\",\n+   \"WORKER_INSTANCE\" : \"4\",\n",
+ "first_bad": {
+  "link": "/tests/500",
+  "text": 500,
+  "type": "link"
+ },
+ "last_good": {
+  "link": "/tests/460",
+  "text": 460,
+  "type": "link"
+ },
+ "needles_log": "No needle changes recorded, test regression due to needles unlikely",
+ "test_log": "No test changes recorded, test regression unlikely"
+}
