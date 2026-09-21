@@ -84,6 +84,21 @@ skill name. A harness without skill support can simply be pointed at `skills/ope
   lives in a file you maintain outside this repository: `$OPENQA_SKILL_POLICY`, `./.openqa-policy.md` or
   `~/.config/openqa-skill/policy.md`; `skills/openqa/references/site-policy.md` has the template.
 
+To report a break in any of the above, see [SECURITY.md](SECURITY.md).
+
+### Security scanners
+
+Reviewing a skill before installing it is good practice, and this one scores badly: a static
+scanner reports it as critical. Every finding we have examined is the skill's subject matter
+rather than its behaviour — the regexes that *detect* `sudo` and `--no-confirm` in someone else's
+test module, the documented example of an injection attempt (`curl … | sh`, whose own table entry
+says to fetch nothing), `git push --force-with-lease` quoted from upstream's commit conventions,
+and the string `0 no warnings` in an exit-code description.
+
+Those scanners are built to vet third-party skills by pattern, and a skill about attacks matches
+the patterns for attacks. Read the findings rather than the score, and see SECURITY.md for what a
+real vulnerability in this repository would look like.
+
 ## Development
 
 ```

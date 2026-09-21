@@ -51,6 +51,13 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: shellcheck tests/openqa/test-*.sh
+      # Advisory: the only check that tracks agentskills.io publish rules as
+      # GitHub enforces them, but it is a preview command and may change.
+      - name: Agent Skills spec (advisory)
+        continue-on-error: true
+        run: gh skill publish --dry-run
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: shfmt
         run: |
           curl -fsSL -o /tmp/shfmt \

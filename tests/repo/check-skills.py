@@ -147,6 +147,12 @@ def check_frontmatter(skill, out):
         )
     if not fm.get("license"):
         out.append(f"frontmatter: {rel}: license missing")
+    # `gh skill publish` refuses a list here: "allowed-tools must be a string
+    # (space-delimited), not an array", which makes the skill unpublishable.
+    if fm.get("allowed-tools", "").lstrip().startswith("-"):
+        out.append(
+            f"frontmatter: {rel}: allowed-tools must be a space-delimited string"
+        )
 
 
 def check_budget(skill, out):
