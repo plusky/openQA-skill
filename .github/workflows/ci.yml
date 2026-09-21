@@ -1,0 +1,59 @@
+# Runs exactly what README.md "Development" documents, so the two cannot drift.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: tests (python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 is the floor README.md promises and has never been executed;
+        # 3.13 is what the suites are developed against.
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v7.0.1
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      # The suites themselves are offline; PyYAML only decides which parser
+      # check-schedule.py takes, and both paths are exercised.
+      - run: pip install PyYAML
+      - name: Script suites
+        run: (rc=0; for t in tests/openqa/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
+      - name: Repository gates
+        run: |
+          python3 tests/repo/check-skills.py
+          python3 tests/repo/check-flags.py
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v7.0.1
+      # ruff is pinned because `format --check` output moves between releases,
+      # which would fail the build on a change nobody made.
+      - run: pipx install ruff==0.16.8
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: shellcheck tests/openqa/test-*.sh
+      - name: shfmt
+        run: |
+          curl -fsSL -o /tmp/shfmt \
+            https://github.com/mvdan/sh/releases/download/v3.14.1/shfmt_v3.14.1_linux_amd64
+          chmod +x /tmp/shfmt
+          /tmp/shfmt -d tests/openqa/test-*.sh
