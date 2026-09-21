@@ -37,8 +37,12 @@ def main():
                 scripts
             ):
                 problems.append(f"flags: {rel}: mentions missing script {name}")
+            fenced = False
             for num, line in enumerate(text.splitlines(), 1):
-                for span in SPAN.findall(line):
+                if line.lstrip().startswith(("```", "~~~")):
+                    fenced = not fenced
+                    continue
+                for span in [line.strip()] if fenced else SPAN.findall(line):
                     call = CALL.match(span)
                     if not call or call.group(1) not in scripts:
                         continue

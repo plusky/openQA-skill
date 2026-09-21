@@ -214,7 +214,9 @@ def tracked_text_files():
             or path.suffix not in TEXT_SUFFIXES
         ):
             continue
-        if "fixtures" in rel.parts:
+        if "fixtures" in rel.parts or (
+            rel.parts[:1] == ("evals",) and "files" in rel.parts
+        ):
             continue
         yield path, rel.as_posix()
 
