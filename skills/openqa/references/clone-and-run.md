@@ -15,18 +15,18 @@
 
 ## Writes and auth
 
-- **Writes** (each -> SKILL.md "Write gate"): `openqa-clone-job` without `--export-command`; `openqa-clone-custom-git-refspec` without `-n`; `openqa-cli schedule`; `openqa-cli api -X POST|PUT|DELETE`; adding an `openqa: Clone` line to a PR (CI then clones on o3 with the repository's key). Keyless: job JSON, `vars.json`, `--export-command`, `-n`.
+- **Writes** (each -> SKILL.md "Write gate"): `openqa-clone-job` without `--export-command`; `openqa-clone-custom-git-refspec` without `-n` or `--export-command`; `openqa-cli schedule`; `openqa-cli api -X POST|PUT|DELETE`; adding an `openqa: Clone` line to a PR (CI then clones on o3 with the repository's key). Keyless: job JSON, `vars.json`.
 - **Role:** creating, restarting and cancelling jobs need an operator or admin key; a user key gets 403 `Operator level required`. Key storage -> references/openqa-model.md "Auth and roles"
 
 ## Helper script clone
 
 ```sh
-openqa-clone-custom-git-refspec -n -v \
+openqa-clone-custom-git-refspec -c '--export-command' \
   https://github.com/os-autoinst/os-autoinst-distri-opensuse/pull/<PR> \
   https://openqa.opensuse.org/tests/<JOB_ID> [KEY=VALUE ...]
 ```
 
-Drop `-n -v` to submit (-> SKILL.md "Write gate"). `-n` alone prints nothing (it prefixes the clone command with `true`); `-v` shows it.
+Drop `--export-command` to submit (-> SKILL.md "Write gate"); it prints the POST payload. `-c` is a passthrough not a guard; `-v` is `set -x`: it traces `GITHUB_TOKEN`.
 
 - **Arg 1:** PR URL (fork and branch come from the GitHub API; rate-limited without `GITHUB_TOKEN`) or branch URL `.../<user>/<repo>/tree/<branch>` (no API call).
 - **Arg 2:** job URL or comma-separated list; the host is taken from it.
@@ -36,7 +36,7 @@ Drop `-n -v` to submit (-> SKILL.md "Write gate"). `-n` alone prints nothing (it
 
 ## Manual clone
 
-`scripts/vr-clone-cmd.py --job <job URL> --fork <user> --branch <ref> ...` prints this form plus `hazard:` lines; it runs nothing. Fork unknown: literal `'<user>'`, `'<branch>'` come out verbatim with a `note:` to replace them.
+`scripts/vr-clone-cmd.py --job <job URL> --fork <user> --branch <ref> ...` prints this form plus `hazard:` lines; it runs nothing.
 
 ```sh
 openqa-clone-job --skip-chained-deps --within-instance \
@@ -51,7 +51,7 @@ openqa-clone-job --skip-chained-deps --within-instance \
 | --- | --- |
 | `--within-instance URL` | = `--skip-download --from H --host H`. Without it `--host` is `localhost` and assets are downloaded. |
 | `_GROUP=0` | Else the clone inherits the source's `_GROUP_ID` and lands in the production build results. |
-| `BUILD=`, `TEST+=@...` | The helper script's labelling; a changed `TEST` is another scenario - no carry-over to or from production. |
+| `BUILD=`, `TEST+=@...` | The helper script's labelling; a changed `TEST` is another scenario - no carry-over either way, so what production shows as `softfailed` via a carried `label:force_result:` is `failed` here. |
 | `CASEDIR=<fork>.git#<ref>` | `<ref>` = branch, tag or SHA; the worker checks it out and derives `PRODUCTDIR`. A branch is re-resolved on restart; a SHA pins. |
 | `NEEDLES_DIR=<fork>.git#<ref>` | A custom `CASEDIR` never changes needles, even if that repo holds some; omit when no needle changed. Needles inside the checkout: `%%CASEDIR%%` in "Settings override grammar". |
 | `--export-command` | Prints the equivalent `openqa-cli api --host ... -X POST jobs ...` instead of posting - show it when asking for approval. Its values are the source job's settings: data -> references/untrusted-content.md "Rules" |
