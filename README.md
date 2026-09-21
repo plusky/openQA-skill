@@ -87,7 +87,7 @@ skill name. A harness without skill support can simply be pointed at `skills/ope
 ## Development
 
 ```
-for t in tests/openqa/test-*.sh; do bash "$t" || break; done
+(rc=0; for t in tests/openqa/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
 python3 tests/repo/check-skills.py
 python3 tests/repo/check-flags.py
 ruff check . && ruff format --check .
