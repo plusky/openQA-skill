@@ -105,7 +105,7 @@ sub post_fail_hook {
 - **One idempotent `cleanup` called from both hooks**, each chained to the same-named `SUPER`: without it the console reset (success) or the log export (failure) is lost.
 - **Nothing fatal in `cleanup` or `post_fail_hook`** (`script_run`, `ignore_failure => 1`, `failok => 1`): a second death hides the first.
 - **`post_fail_hook`: SUPER first, cleanup last**, so logs are exported before cleanup removes them; upload only test-specific files -> references/distri-helpers.md "Log upload".
-- `script_retry` defaults: `retry => 10`, `delay => 30`, `timeout => 30`; dies when exhausted.
+- **`pkill -f` matches argv; a typed command is not**: any wrapper holding it in argv (`sudo`, `timeout` in `*_retry`, `ssh`, `sh -c`) dies too.
 
 ## X11 needle test
 
@@ -165,7 +165,6 @@ sub cleanup {
 ```
 
 - **The runtime arrives as run_args**: container modules are scheduled in `lib/main_containers.pm`, not YAML, as `loadtest('containers/seccomp', run_args => $run_args, name => $run_args->{runtime} . '_seccomp')` -> references/area-conventions.md "Containers".
-- `containers_factory` accepts `docker`, `podman`, `containerd_crictl`, `containerd_nerdctl`, else dies.
 - **Keep the engine on `$self`**, not in the exemplar's file-scoped `my $engine;`; no `sub cleanup()` prototype.
 
 ## Transactional test
@@ -247,7 +246,7 @@ def run(self):
 | `fatal => 1` | Later modules are meaningless after a failure (boot, setup, precondition). Never on validators or smoke tests. | `tests/security/selinux/sestatus.pm` |
 | `milestone => 1` | The module leaves state worth snapshotting as `lastgood`; pair with `fatal => 1`. Never on a leaf test. | `tests/console/consoletest_setup.pm` |
 | `fatal => 0` | The job must continue on backends without snapshots: there a failure is fatal unless the `fatal` key exists. | `tests/containers/seccomp.pm` |
-| `no_rollback => 1` | A failure leaves nothing harmful behind, or a rollback would break the session. | `tests/console/tcpdump.pm` |
+| `no_rollback => 1` | Nothing harmful is left behind, or a rollback would break the session or discard work a later module still has to report (coverage runs). | `tests/console/tcpdump.pm` |
 | `always_rollback => 1` | The module damages system state even on success. The run dies on backends without snapshots. | `tests/console/zfs.pm` |
 | `always_run => 1` | Teardown that must run after a fatal failure. | `tests/publiccloud/destroy.pm` |
 

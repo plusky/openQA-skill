@@ -57,7 +57,7 @@ Timeouts: seconds, multiplied by `TIMEOUT_SCALE` (do not inflate calls for slow 
 |---|---|---|---|
 | `script_run($cmd [, $t] [, quiet => 1, output => 'note'])` | 30 | exit code; `undef` only for `timeout => 0` (type and leave) | on timeout; never on non-zero exit |
 | `assert_script_run($cmd [, $t [, $msg]] \| [fail_message => $msg, quiet => 1])` | 90 | nothing | timeout, non-zero exit |
-| `script_output($script [, $t] [, proceed_on_failure => 1, type_command => 1, quiet => 1])` | 90 | stdout, trimmed | timeout; non-zero exit unless `proceed_on_failure` |
+| `script_output($script [, $t] [, proceed_on_failure => 1, type_command => 1, quiet => 1])` | 90 | output, trimmed | timeout; non-zero exit unless `proceed_on_failure` |
 | `validate_script_output($script, sub { m/../ } \| qr/../ [, $t] [, title =>, fail_message =>, proceed_on_failure =>])` | 90 | 0; box with script, check, output | check false (coderef sees the output in `$_`); check neither coderef nor `qr`; whatever `script_output` throws |
 | `background_script_run($cmd [, quiet => 1])` | - | PID | `PID marker not found` |
 
@@ -144,7 +144,9 @@ Needle strategy -> references/needles-gui.md "GUI idioms".
 
 ## Serial terminal
 
-Text-only consoles (`root-virtio-terminal`, `root-sut-serial`): fast, but blind. Selecting one -> references/distri-helpers.md "Console selection".
+Text-only consoles (`root-virtio-terminal`, `root-sut-serial`): fast and screenless, but a real tty. Selecting one -> references/distri-helpers.md "Console selection".
+
+- **Stdout is a tty, stderr is captured**: `cmd </dev/null 2>>$log | cat` - `| cat` alone leaves stderr in.
 
 - **Unavailable:** needle calls, clicks, mouse, `save_screenshot` (no-op), `hold_key`/`release_key`, `send_key` other than `'ret'`.
 - **Signals:** `is_serial_terminal() ? type_string('', terminate_with => 'ETX') : send_key 'ctrl-c';` — `'EOT'` is ctrl-d.
@@ -164,4 +166,3 @@ Text-only consoles (`root-virtio-terminal`, `root-sut-serial`): fast, but blind.
 - **Named args only:** `assert_and_click`, `assert_and_dclick`, `click_lastmatch`, `mouse_drag`. `assert_and_click('tag', 60)` dies `Odd name/value argument`; write `timeout => 60`.
 - **`wait_screen_change` with a timeout:** `wait_screen_change(sub { send_key 'alt-n' }, 20)`; `0` becomes 10. The triggering action goes inside the block or the change is missed.
 - **`record_info ..., result => 'fail'` leaves the module green** — to fail, `die`.
-- Serial-terminal limits -> references/testapi.md "Serial terminal".
