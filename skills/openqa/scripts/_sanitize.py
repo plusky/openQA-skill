@@ -16,6 +16,8 @@ import secrets
 import sys
 import unicodedata
 
+import _secrets
+
 DEFAULT_MAX_LINE = 2000
 DEFAULT_MAX_BYTES = 65536
 
@@ -144,6 +146,11 @@ def sanitize(text, *, max_line=DEFAULT_MAX_LINE, max_bytes=DEFAULT_MAX_BYTES):
     text = _ASCII_CONTROLS.sub("", text)
     text = _NON_ASCII.sub(_map_non_ascii, text)
     text = _STACKED_MARKS.sub(r"\1", text)
+    # After the decoding tricks are gone, so a secret split up with invisible characters
+    # cannot dodge the table; before the marker escape and the caps, so a redaction
+    # marker cannot be cut in half. Line structure is preserved for the callers that
+    # number lines.
+    text, _ = _secrets.redact(text)
     # Only now: stripping may have joined the pieces of a split-up marker.
     text = _neutralise(text)
     if max_line:

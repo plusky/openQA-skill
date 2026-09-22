@@ -1,0 +1,17 @@
+[2026-09-21T10:05:06.123456+02:00] [debug] [pid:3014] scheduling console/opencode
+[2026-09-21T10:05:06.200000+02:00] [info] [pid:3014] ::: basetest::runtest: starting opencode
++ rpm -q opencode
+opencode-1.18.30-3.1.x86_64
++ zypper ar https://download.opensuse.org/tumbleweed/repo/oss/ oss
+Repository 'oss' successfully added
+checksum e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+root=UUID=123e4567-e89b-12d3-a456-426614174000 ro quiet
+TEST_GIT_HASH=3f718db6c0de4a2b1e5f8a9c7d6e5f4a3b2c1d0e
+"JOBTOKEN" : "FkZT9GDzQrravzhD",
+EXTRABOOTPARAMS=console=ttyS0 live.password=nots3cr3t
+SSH_AUTH_SOCK=/tmp/ssh-XXXX/agent.1234
+TOKEN=none
+ARM_CLIENT_SECRET=${AZURE_SECRET}
+candidates: bootloader-20260919:96% inst-welcome:88%
+worker openqaworker20:24 picked up job 6230050
+[2026-09-21T10:55:26.000000+02:00] [info] ::: basetest::runtest: finished opencode

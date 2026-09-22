@@ -19,6 +19,7 @@ import argparse
 import re
 
 import _oqa
+import _secrets
 
 OK_RESULTS = _oqa.RESULT_GROUPS["ok"]
 # Not-ok runs in a row from which a failure is called persistent rather than intermittent.
@@ -183,7 +184,10 @@ def settings_diff(text, limit, verbose):
         and change["-"].replace(old, new) == change.get("+")
     ]
     lines = [
-        f"{key}: {_oqa.tok(change.get('-'), 100)} -> {_oqa.tok(change.get('+'), 100)}"
+        f"{key}: "
+        + _secrets.setting_value(key, change.get("-"), _oqa.tok(change.get("-"), 100))
+        + " -> "
+        + _secrets.setting_value(key, change.get("+"), _oqa.tok(change.get("+"), 100))
         for key, change in sorted(changes.items(), key=lambda item: item[0] != "BUILD")
         if key not in follows
     ]
