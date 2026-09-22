@@ -137,4 +137,11 @@ check "--help exits 0" 0 $?
 python3 "$scripts/_sanitize.py" --max-line -1 </dev/null >/dev/null 2>&1
 check "bad option value exits 2" 2 $?
 
+# The point of the redaction pass: it must run from sanitize(), not only when
+# _secrets.py is driven directly. A no-op here passes every other suite.
+actual=$(printf 'zypper ar https://alice:hunter2@example.org/r x\n' | python3 "$scripts/_sanitize.py" --no-fence 2>/dev/null)
+check "sanitize redacts credential values" "zypper ar https://alice:[REDACTED:url-userinfo]@example.org/r x" "$actual"
+actual=$(printf 'worker openqaworker20 ran module foo\n' | python3 "$scripts/_sanitize.py" --no-fence 2>/dev/null)
+check "and leaves ordinary log text alone" "worker openqaworker20 ran module foo" "$actual"
+
 exit $fail

@@ -118,6 +118,7 @@ import urllib.error
 import urllib.request
 from urllib.parse import quote, urlencode, urlsplit
 
+import _secrets
 from _sanitize import fence, sanitize
 
 __all__ = [
@@ -586,7 +587,13 @@ def client_from_args(args, script, **kwargs):
 
 def run(main):
     try:
-        sys.exit(main())
+        code = main()
+        # Say that a credential was in this job's artefacts, so it gets rotated.
+        # Silence here is what teaches people to trust the redactor.
+        note = _secrets.summary(_secrets.total())
+        if note:
+            print(note, file=sys.stderr)
+        sys.exit(code)
     except OqaError as error:
         print(f"error: {error}", file=sys.stderr)
         sys.exit(2)

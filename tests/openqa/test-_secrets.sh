@@ -139,6 +139,36 @@ _secrets.redact('worker openqaworker20 ran module foo at 12:00:00\n' * 20000)
 "
 check "20k ordinary lines stay well under a second of budget" 1 "$((SECONDS < 10))"
 
+# --- defects found in review, each with the input that demonstrated it ------------
+keeps "a psql port, not a password" 'psql -h db -p 5432 -U openqa -c x\n'
+keeps "a container uid:gid, not credentials" 'podman run --rm -u 1000:1000 registry/img\n'
+keeps "a published port" 'docker run -p 8080:80 img\n'
+redacts "docker login --password, which no trigger used to reach" '+ docker login --password Sup3rS3cretVal reg.ex\n' password-flag
+redacts "mysql -p, which no trigger used to reach" '+ mysql -pMyP4ssw0rdX -e x\n' password-flag
+redacts "an aws prefix outside the two in TRIGGERS" 'principal AROAIOSFODNN7EXAMPLE listed\n' aws-key-id
+# shellcheck disable=SC2016
+redacts "a password containing a template character" 'ROOT_PASSWORD=Sup3r$ecret!\n' keyed-assignment
+redacts "a 32-hex api key, which the digest veto used to drop" 'API_KEY=0123456789abcdef0123456789abcdef\n' keyed-assignment
+redacts "a secret dressed as already-redacted" 'TOKEN=[REDACTED:x]REALSECRETVALUE\n' keyed-assignment
+
+# A key block must not change how many lines the caller sees.
+actual=$(printf -- 'a\n-----BEGIN RSA PRIVATE KEY-----\nAAA\nBBB\n-----END RSA PRIVATE KEY-----\nz\n' |
+	python3 "$scripts/_secrets.py" 2>/dev/null | wc -l)
+check "a swallowed key block keeps the line count" 6 "$actual"
+
+# The scan must stay linear: sanitize() keeps up to 256 KiB of a single line.
+SECONDS=0
+python3 -c "
+import sys; sys.path.insert(0, '$scripts')
+import _secrets
+_secrets.redact('key' * 80000)
+"
+check "one 240k-character line stays linear" 1 "$((SECONDS < 10))"
+
+# A log is not always valid UTF-8.
+printf 'TOKEN=\377\376 abc\n' | python3 "$scripts/_secrets.py" >/dev/null 2>&1
+check "invalid utf-8 is replaced, not a traceback" 0 $?
+
 # --- site formats, which a public repository cannot carry ---------------------------
 printf '# a site format\nSUSE-[A-Z0-9]{8}-[A-Z0-9]{4}\n' >"$work/patterns.txt"
 actual=$(printf 'regcode SUSE-ABCD1234-EF56 accepted\n' |
