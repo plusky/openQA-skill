@@ -14,6 +14,7 @@ import re
 import sys
 from urllib.parse import urlsplit
 
+import _secrets
 from _sanitize import sanitize
 
 MAX_INPUT = 65536
@@ -322,6 +323,17 @@ def lint(draft, extra_suffixes=()):
                 'rewrite a URL that follows ( [ or "); it is not a bugref, add the short ref'
             )
 
+    # --- credentials ---
+    # The last gate before an internal secret becomes a public comment: this draft is
+    # usually assembled from log excerpts, which openQA does not redact.
+    for number, line in enumerate(text.split("\n"), 1):
+        _, found = _secrets.redact(line)
+        for rule in sorted(found):
+            warnings.append(
+                f"credential line {number}: looks like a {rule}; openQA does not redact "
+                "logs, so a quoted excerpt can carry one. Remove it and rotate the credential"
+            )
+
     # --- labels ---
     if labels:
         out.append(f"labels: {len(labels)}")
@@ -459,7 +471,9 @@ def lint(draft, extra_suffixes=()):
             )
 
     # --- shape ---
-    if sanitize(draft, max_line=0, max_bytes=0) != draft:
+    # Compare against the redacted draft, not the raw one: sanitize() also redacts,
+    # so a credential would otherwise be reported as a control character.
+    if sanitize(draft, max_line=0, max_bytes=0) != _secrets.redact(draft)[0]:
         warnings.append(
             "control-chars: the draft contains control, escape or invisible characters "
             "(or a fence marker); retype it as plain text"

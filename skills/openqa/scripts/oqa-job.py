@@ -54,6 +54,7 @@ from datetime import datetime
 from urllib.parse import quote
 
 import _oqa
+import _secrets
 
 # The scenario line carries DISTRI..MACHINE and BUILD, the dependency lines the
 # START_AFTER_TEST / PARALLEL_WITH relations.
@@ -273,7 +274,11 @@ def print_settings(job, pattern, verbose):
     if keys:
         print(
             "settings: "
-            + " ".join(f"{tok(key, 60)}={tok(settings[key], 160)}" for key in keys)
+            + " ".join(
+                f"{tok(key, 60)}="
+                + _secrets.setting_value(key, settings[key], tok(settings[key], 160))
+                for key in keys
+            )
         )
 
 

@@ -41,6 +41,25 @@ the server reports; no local file is opened, so a PATH that does not exist here 
 Requests: 1 + groups + scenarios.
 Line: `group= version= flavor= arch= machine= test= job= result= build=`.
 
+## _secrets.py - redaction, imported by _sanitize.py
+
+Every third-party string the scripts print goes through it, stdout and stderr alike, so a
+credential-shaped value never reaches the transcript. `[REDACTED:<rule>]` marks what went;
+the diagnostic half is kept, so `https://alice:[REDACTED:url-userinfo]@host/` still names the
+account and the host. A per-rule count goes to stderr: treat it as "this job's artefacts held
+a credential", and say so.
+
+Also usable directly, `stdin` to `stdout`, exit 1 when anything was redacted:
+
+    openqa-cli archive <job> ./logs && _secrets.py < ./logs/testresults/autoinst-log.txt
+
+`--scrub-patterns` takes site-specific formats that cannot live in a public repository. There
+is no environment variable and no file under `$HOME`: implicit configuration is how a script
+picks up a credential by accident.
+
+**A mitigation, not a boundary** -> references/redaction.md "What it is not". Rotate a
+credential that reached a log.
+
 ## oqa-job.py - one job, ready to classify
 
 A restarted job is history, a `parallel_failed` job is a victim, steps after the die step are post_fail_hook.

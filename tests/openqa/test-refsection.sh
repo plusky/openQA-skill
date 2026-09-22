@@ -10,7 +10,9 @@ fail=0
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/skill/scripts" "$work/skill/references" "$work/outside"
-cp "$scripts/refsection.py" "$scripts/_sanitize.py" "$work/skill/scripts/"
+# _secrets.py comes too: _sanitize.py imports it, so a skill copied without it
+# fails at import. Installers copy the whole scripts/ directory; this test does not.
+cp "$scripts/refsection.py" "$scripts/_sanitize.py" "$scripts/_secrets.py" "$work/skill/scripts/"
 cp "$fixtures/guide.md" "$work/skill/references/"
 cp "$fixtures/hostile.md" "$work/outside/"
 cd "$work/outside" || exit 2
