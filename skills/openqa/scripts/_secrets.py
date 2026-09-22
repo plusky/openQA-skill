@@ -39,8 +39,6 @@ TRIGGERS = (
     "ghr_",
     "github_pat_",
     "glpat-",
-    "akia",
-    "asia",
     "xox",
     "ey",
     "pass",
@@ -49,24 +47,64 @@ TRIGGERS = (
     "key",
     "credential",
     "regcode",
-    "-u ",
-    "--user",
+    "curl",
+    "wget",
+    "ipmitool",
+    "mysql",
+    "sshpass",
+    "smbclient",
+    "helm",
+    "podman",
+    "docker",
+    "kubectl",
+    # every prefix the aws-key-id rule alternates over; a missing one disables it
+    "a3t",
+    "agpa",
+    "aida",
+    "aipa",
+    "akia",
+    "anpa",
+    "anva",
+    "aroa",
+    "asia",
 )
 
 # Values that are not secrets however they are spelled. Without these the table
 # redacts its way through a normal log and gets switched off.
 PLACEHOLDERS = frozenset(
-    """none null true false empty unset changeme placeholder password passwd secret token
-    redacted xxx test example dummy foo bar nots3cr3t""".split()
+    [
+        "none",
+        "null",
+        "true",
+        "false",
+        "empty",
+        "unset",
+        "changeme",
+        "placeholder",
+        "password",
+        "passwd",
+        "secret",
+        "token",
+        "redacted",
+        "xxx",
+        "test",
+        "example",
+        "dummy",
+        "foo",
+        "bar",
+        "nots3cr3t",
+    ]
 )
 _UUID = re.compile(
     r"\A[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z"
 )
-_HEX = re.compile(r"\A[0-9a-fA-F]+\Z")
-_TEMPLATE = re.compile(r"[$%{<]")
+_PATH = re.compile(r"\A[~.]{0,2}/[\w./+-]*\Z")
+_TEMPLATE = re.compile(
+    r"\A(?:[$%]\{[^}]*\}|\$\([^)]*\)|\{\{[^}]*\}\}|<[^>]*>|%\w+%|\$\w+)\Z"
+)
 # openQA invalidates JOBTOKEN when the job finishes, so it is dead by the time anyone
 # reads the log; redacting it only trains people to ignore the warnings.
-_ALLOW_KEYS = re.compile(r"\A(JOBTOKEN|NAME|CASEDIR|NEEDLES_DIR)\Z", re.I)
+_ALLOW_KEYS = re.compile(r"\A(JOBTOKEN|NAME|CASEDIR|NEEDLES_DIR)\Z", re.IGNORECASE)
 
 
 # openQA hides a setting from vars.json when its NAME matches this shape. It does not
@@ -98,12 +136,11 @@ def _is_placeholder(value):
     bare = value.strip("'\"")
     if len(bare) < 6 or bare.lower() in PLACEHOLDERS:
         return True
-    if _TEMPLATE.search(bare) or bare.startswith(("/", "./", "~/")):
+    if _TEMPLATE.match(bare) or _PATH.match(bare):
         return True
-    # A digest or a UUID is the single most common false positive in these logs.
-    if _UUID.match(bare) or (_HEX.match(bare) and len(bare) in (32, 40, 64, 128)):
-        return True
-    return False
+    # A UUID is the common false positive. A hex digest is deliberately NOT vetoed: this
+    # runs only after the key name said "credential", and a 32-hex API_KEY is a real key.
+    return bool(_UUID.match(bare))
 
 
 def _keep_head(match):
@@ -135,7 +172,7 @@ RULES = (
     # and which account a job used is evidence; the password is not.
     (
         "url-userinfo",
-        re.compile(r"([a-zA-Z][a-zA-Z0-9+.-]*://[^/\s:@]{1,64}:)[^/\s@]{1,256}@"),
+        re.compile(r"([a-zA-Z][a-zA-Z0-9+.-]{0,30}://[^/\s:@]{1,64}:)[^/\s@]{1,256}@"),
         r"\1" + MARK.format("url-userinfo") + "@",
     ),
     (
@@ -147,13 +184,15 @@ RULES = (
     ),
     (
         "curl-user",
-        re.compile(r"((?:\s-u|\s--user)[= ]['\"]?[^\s:'\"]{1,64}:)[^\s'\"]{1,256}"),
+        re.compile(
+            r"(?i)((?:curl|wget)\b[^\n]{0,200}?(?:\s-u|\s--user)[= ]['\"]?[^\s:'\"]{1,64}:)[^\s'\"]{1,256}"
+        ),
         r"\1" + MARK.format("curl-user"),
     ),
     (
         "password-flag",
         re.compile(
-            r"(?i)((?:ipmitool|helm|podman|docker|mysql|psql|sshpass|smbclient)\b[^\n]{0,200}?\s-{1,2}[pP](?:assword)?[= ])\S{4,}"
+            r"(?i)((?:ipmitool\b[^\n]{0,200}?\s-P|(?:mysql|sshpass|smbclient)\b[^\n]{0,200}?\s-p|(?:helm|podman|docker|kubectl|skopeo)\b[^\n]{0,80}?\blogin\b[^\n]{0,200}?\s-p|[^\n]{0,200}?\s--password)[ =]?)\S{4,}"
         ),
         r"\1" + MARK.format("password-flag"),
     ),
@@ -168,10 +207,12 @@ RULES = (
 # `sanitize()` sees "hunter2", never "PASSWORD=hunter2", so this is the only rule that
 # can know an SCC_REGCODE value is secret.
 _KEYED = re.compile(
-    r"(?i)\b([A-Z0-9_]*(?:PASSWORD|PASSWD|SECRET|TOKEN|APIKEY|API_KEY|ACCESS_KEY|PRIVATE_KEY|CREDENTIAL|REGCODE)[A-Z0-9_]*)"
+    r"(?i)(?<![A-Z0-9_])([A-Z0-9_]{0,40}(?:PASSWORD|PASSWD|SECRET|TOKEN|APIKEY|API_KEY|ACCESS_KEY|PRIVATE_KEY|CREDENTIAL|REGCODE)[A-Z0-9_]{0,40})"
     r"(\s*[:=]\s*)(['\"]?)([^\s'\"]{1,256})"
 )
 
+# A marker in the SOURCE text is an attacker dressing a secret as already-redacted.
+_IS_MARK = re.compile(r"\[REDACTED:[a-z-]+\]")
 _PEM_BEGIN = re.compile(r"-----BEGIN[ A-Z0-9_-]*PRIVATE KEY(?: BLOCK)?-----")
 _PEM_END = re.compile(r"-----END[ A-Z0-9_-]*PRIVATE KEY(?: BLOCK)?-----")
 
@@ -180,7 +221,7 @@ def _keyed_sub(match, found):
     key, sep, quote, value = match.groups()
     # A more specific rule already replaced this value; keep its name, which tells the
     # reader what kind of credential it was.
-    if value.startswith(MARK.format("")[:10]):
+    if _IS_MARK.fullmatch(value):
         return match.group(0)
     if _ALLOW_KEYS.match(key) or _is_placeholder(value):
         return match.group(0)
@@ -221,6 +262,7 @@ def redact(text):
         if in_pem:
             if _PEM_END.search(line):
                 in_pem = False
+            out.append("")  # keep the line count: callers number lines
             continue
         if _PEM_BEGIN.search(line):
             # A key body is many lines of base64 that no line rule would match; swallow
@@ -284,7 +326,7 @@ def main(argv=None):
             load_patterns(args.scrub_patterns)
         except (OSError, ValueError) as error:
             parser.error(str(error))
-    text, found = redact(sys.stdin.read())
+    text, found = redact(sys.stdin.buffer.read().decode("utf-8", "replace"))
     sys.stdout.write(text)
     if found and not args.quiet:
         print(summary(found), file=sys.stderr)
