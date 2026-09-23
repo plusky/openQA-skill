@@ -157,6 +157,17 @@ check "a huge section of a foreign file is capped inside its fence" "1 1 1" \
 actual=$(ref $'no-such\nINJECTED=1 \e[31m.md' --list 2>&1 >/dev/null | head -n 1)
 check "a hostile file name in the error stays on one clean line" 'refsection: no such file: no-such INJECTED=1 .md' "$actual"
 
+# `-> SKILL.md "<Section>"` pointers: the skill's own SKILL.md, never one in the cwd.
+printf '# Skill\n\n## Script flags\n\n- x.py --y\n\n## References\n' >"$work/skill/SKILL.md"
+printf '# Decoy\n\n## Script flags\n\nINJECTED=1\n' >"$work/outside/SKILL.md"
+check "bare SKILL.md is the skill's own" "$(printf '## Script flags\n\n- x.py --y')" \
+	"$(ref SKILL.md "Script flags")"
+mkdir -p "$work/skill/scripts" "$work/outside/scripts"
+printf '# Scripts\n\n## x.py - x\n\n--y does y.\n' >"$work/skill/scripts/README.md"
+printf '# Decoy\n\n## x.py - x\n\nINJECTED=1\n' >"$work/outside/scripts/README.md"
+check "scripts/README.md is the skill's own" "$(printf '## x.py - x\n\n--y does y.')" \
+	"$(ref scripts/README.md "x.py")"
+
 ref --help >/dev/null
 check "--help exits 0" 0 $?
 
