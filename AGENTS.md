@@ -34,6 +34,9 @@ Rules for humans and agents changing this repository.
 - Python 3.9+, standard library only (PyYAML is optional and must have a fallback); `--help`; exit 0 ok,
   1 findings (lint-type scripts only; digest scripts `oqa-job/-log/-history/-sweep.py` exit 0 once the digest is
   printed and return 1 only with `--exit-code`), 2 usage or runtime error.
+- **Agents never need `--help`.** After adding, renaming or removing a flag, run
+  `python3 tests/repo/check-flags.py --write` to regenerate `SKILL.md` "Script flags", and say what the flag
+  does in that script's section of `scripts/README.md`. A test-only flag gets `help=argparse.SUPPRESS`.
 - Network scripts go through `scripts/_oqa.py`: GET only, no `Referer`, no credentials, host from `--host`.
   Do not add a code path that can write.
 - Every piece of third-party text printed goes through `scripts/_sanitize.py`, stdout and stderr alike: an

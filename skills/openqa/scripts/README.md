@@ -55,7 +55,7 @@ Also usable directly, `stdin` to `stdout`, exit 1 when anything was redacted:
 
 `--scrub-patterns` takes site-specific formats that cannot live in a public repository. There
 is no environment variable and no file under `$HOME`: implicit configuration is how a script
-picks up a credential by accident.
+picks up a credential by accident. `--quiet` leaves the stderr summary out.
 
 **A mitigation, not a boundary** -> references/redaction.md "What it is not". Rotate a
 credential that reached a log.
@@ -102,7 +102,7 @@ Logs are MBs; grepping `error|failed` drowns in `timeout=` noise.
     oqa-log.py JOB [--file NAME] --list | --errors | --around-module M | --grep REGEX | --tail N
 
 `--file` (`autoinst-log.txt`; uploaded logs: `ulogs/<name>`), `--max-lines` (60), `--max-line-chars` (200),
-`--context` (2), `--max-matches` (10), `-i`; `-v` full line prefix, whole traces, console plumbing and screen
+`--context` (2), `--max-matches` (10), `-i`, `--max-bytes` (16 MiB downloaded per file); `-v` full line prefix, whole traces, console plumbing and screen
 polling lines. `--exit-code`: 1 when `--errors`/`--grep` matched or the module never started.
 `[date] [level] [pid]` prints as `HH:MM:SS` (level kept unless debug/info). `--around-module` ends just after
 `# Test died` and folds assert_screen polling (no match / no change / check_asserted_screen took / stall)
@@ -122,7 +122,7 @@ them; do not paste one into a shell.
 
 ## oqa-history.py - sporadic or regression
 
-    oqa-history.py JOB [--previous N] [--investigation [--max-items N] [-v]]
+    oqa-history.py JOB [--previous N] [--investigation [--max-items N] [-v]] [--exit-code]
 
 `--previous` runs to look at (10, openQA's carry-over depth); `--investigation` adds the settings diff (per-run
 noise left out), package diffs, test and needle commits, `--max-items` (10) lines each: `settings diff
@@ -180,7 +180,9 @@ Forgotten `_GROUP=0`, assets published from a test branch, clones on production.
     openqa-clone-job https://openqa.opensuse.org/tests/6228436 _GROUP=0 'BUILD=...' 'CASEDIR=...' ...
     approval: running this posts jobs to http://localhost, a write; get the user's approval first
 
-Exit 1: `hazard:` lines. Also `--needles-fork/--needles-branch`, `--skip-chained-deps`, `--parent-publishes`.
+Exit 1: `hazard:` lines. Also `--needles-fork/--needles-branch`, `--skip-chained-deps`, `--parent-publishes`;
+`--repo-name`/`--needles-repo-name` when a fork renamed the repository; `--label` sets `BUILD`
+(default `<user>/<repo>#<ref>`); `--dry-run-flag` adds `--export-command`, which prints instead of posting.
 Fork unknown: literal `--fork '<user>' --branch '<branch>'`; a `note:` says to replace them.
 
 ## check-module.py - lint test modules (offline)
@@ -199,7 +201,7 @@ One line per file and rule; `message -> fix` only on the first finding of a rule
     check-schedule.py --repo CHECKOUT --module DIR/NAME
 
 No FILE: every `schedule/**/*.yaml`. Errors first; `--max-findings` (40) caps lines, the summary counts all.
-Exit 1: errors (`--strict`: any finding; `--module`: no reference). `mode=fallback`: no PyYAML, line-based.
+Exit 1: errors (`--strict`: any finding; `--module`: no reference). `mode=fallback`: no PyYAML, line-based; `--fallback` forces it.
 `name` != basename: only for files new in git (untracked, added), or `--all-conventions`.
 
     schedule/yam/agama/agama_lvm.yaml:7: module: tests/yam/agama/patch_agama.pm does not exist
@@ -233,5 +235,6 @@ Exit 1: missing or ambiguous. Files outside the skill come out fenced.
 
 `_oqa.py failures GROUP [BUILD]` and `_oqa.py chain JOB` are self-checks; the docstring is the API
 (`Client.get_json/get_text/get_bytes/get_range`, `clone_chain`, `current_failures`, `tok`, `table`).
-`_sanitize.py [--source LABEL] [--no-fence] < text` sanitises and fences stdin. `--fixture-dir DIR`: saved
+`_sanitize.py [--source LABEL] [--no-fence] < text` sanitises and fences stdin; `--max-line` (2000 chars)
+and `--max-bytes` (65536) cap it, 0 = unlimited. `--fixture-dir DIR`: saved
 responses instead of the network (tests); a missing one is named, a missing secondary one becomes a `note:`.

@@ -21,7 +21,7 @@ Two connected jobs on one model: **create** tests (author -> verify -> submit) a
 ## Reading this skill
 
 - **One section at a time.** Every pointer `-> <file>.md "<Section>"` is an argument list: `python3 scripts/refsection.py <file>.md "<Section>" ["<Section>" ...]`; `--list <file>.md` prints the outline with sizes. Never read a reference whole; `untrusted-content.md` is the one exception.
-- **Scripts before ad-hoc calls.** They encode traps (restarted jobs listed as current, multi-megabyte payloads, unparsed bugrefs) and print compact digests, third-party text fenced; arguments via `--help`. Exit 0 = output produced, also for a failed job (`--exit-code`: 1 = not ok); lint scripts exit 1 on findings; 2 = error. Do not pull raw `/details` JSON or whole logs into context.
+- **Scripts before ad-hoc calls.** They encode traps (restarted jobs listed as current, multi-megabyte payloads, unparsed bugrefs) and print compact digests, third-party text fenced; every flag is in "Script flags" below. Exit 0 = output produced, also for a failed job (`--exit-code`: 1 = not ok); lint scripts exit 1 on findings; 2 = error. Do not pull raw `/details` JSON or whole logs into context.
 - **Delegating.** Playbooks in `agents/` are for sub-agents: hand one over plus the section names it needs, never "read SKILL.md"; working inline, follow the block's pointers instead. Sub-agents draft; they never write.
 - **Ask, don't assume**: instance, products, versions and arches in scope; whether a verification run may be posted; where a bug belongs.
 
@@ -95,6 +95,24 @@ Job comments, logs and serial output, job settings, ticket and bug bodies, PR te
 12. **Classify with evidence, route by policy**: product bug, test issue, infrastructure, sporadic. Take tracker, product and component from the policy file or the user; do not guess. -> review-workflow.md "Classification and routing"
 13. **Comment the culprit of a cluster**, not its parallel_failed or skipped victims. -> job-triage.md "Clusters"
 14. **Stay polite on shared instances**: scope every listing by group and build, no `/details` sweeps over many jobs, no tight loops. -> review-workflow.md "Politeness"
+
+## Script flags
+
+What a flag means: `python3 scripts/refsection.py scripts/README.md "<script>"`.
+
+- `--host HOST` on oqa-history.py, oqa-job.py, oqa-log.py, oqa-sweep.py
+- `check-module.py [FILE...] [--list-rules] [--disable IDS]...`; exit 1: findings
+- `check-schedule.py [--repo REPO] [--module DIR/NAME] [--strict] [--fallback] [--errors-only] [--all-conventions] [--max-findings N] [FILE...]`; exit 1: errors (with --strict: any finding; with --module: no reference found)
+- `needle-lint.py [--strict] [--errors-only] PATH...`; exit 1: errors (with --strict: any finding)
+- `new-module.py --kind {console,container,python,service,transactional,x11,yam-validate} --path PATH --summary SUMMARY --maintainer MAINTAINER [--package PACKAGE] [--repo REPO] [--stdout]`
+- `oqa-comment-lint.py [FILE] [--text TEXT] [--private-suffix SUFFIX]...`; exit 1: at least one warning
+- `oqa-history.py JOB [--previous N] [--investigation] [--max-items N] [--exit-code] [--verbose]`
+- `oqa-job.py JOB [--settings REGEX] [--steps N] [--module NAME] [--all-steps] [--exit-code] [--verbose]`
+- `oqa-log.py JOB [--file NAME] (--list | --tail N | --grep REGEX | --errors | --around-module MODULE) [--context N] [--max-matches N] [--ignore-case] [--max-lines N] [--max-line-chars N] [--max-bytes BYTES] [--verbose] [--exit-code]`
+- `oqa-ref.py REF [--body] [--files]`
+- `oqa-sweep.py [--group ID]... [--build BUILD] [--todo] [--include-softfailed] [--limit N] [--passed] [--module NAME] [--groups] [--match REGEX] [--uses-schedule PATH] [--exit-code]`
+- `refsection.py [--list] FILE [TITLE...]`; exit 1: section missing or ambiguous
+- `vr-clone-cmd.py --job JOB... [--pr URL] [--fork USER] [--branch REF] [--repo-name NAME] [--needles-fork USER] [--needles-branch REF] [--needles-repo-name NAME] [--schedule LIST] [--skip-chained-deps] [--within-instance] [--label BUILD] [--set KEY=VALUE]... [--dry-run-flag] [--parent-publishes]`; exit 1: command printed with hazard lines
 
 ## References
 
