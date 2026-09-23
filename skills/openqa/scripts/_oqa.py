@@ -573,12 +573,9 @@ def add_common_args(parser):
         default=DEFAULT_HOST,
         help=f"openQA instance: URL, host name or the alias o3 (default: {DEFAULT_HOST})",
     )
-    parser.add_argument(
-        "--fixture-dir",
-        metavar="DIR",
-        help="answer every request from saved responses in DIR, never use the network "
-        "(offline tests; a missing file is named in the error)",
-    )
+    # Answers every request from saved responses in DIR, never the network. A test hook,
+    # so it stays out of --help and out of the flag index in SKILL.md.
+    parser.add_argument("--fixture-dir", metavar="DIR", help=argparse.SUPPRESS)
 
 
 def client_from_args(args, script, **kwargs):

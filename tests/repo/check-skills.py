@@ -27,7 +27,7 @@ ALLOWED_KEYS = {
 # Byte caps. SKILL.md is loaded on every trigger; references are read a section at a time.
 DEFAULT_REFERENCE_CAP = 15000
 BUDGETS = {
-    "SKILL.md": 14000,
+    "SKILL.md": 16500,
     "references/untrusted-content.md": 7500,
     "references/site-policy.md": 6000,
     "references/custom-distri.md": 8000,

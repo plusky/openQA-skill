@@ -102,11 +102,11 @@ real vulnerability in this repository would look like.
 ## Development
 
 ```
-(rc=0; for t in tests/openqa/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
+(rc=0; for t in tests/*/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
 python3 tests/repo/check-skills.py
 python3 tests/repo/check-flags.py
 ruff check . && ruff format --check .
-shellcheck tests/openqa/test-*.sh && shfmt -d tests/openqa/test-*.sh
+shellcheck tests/*/test-*.sh && shfmt -d tests/*/test-*.sh
 ```
 
 The references were checked against these upstream revisions: openQA `a096316`, os-autoinst `93a96a0`,

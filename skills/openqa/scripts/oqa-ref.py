@@ -229,11 +229,8 @@ def main():
         action="store_true",
         help=f"GitHub pull requests: list the changed files, at most {MAX_FILES} (one more request)",
     )
-    parser.add_argument(
-        "--fixture-dir",
-        metavar="DIR",
-        help="answer every request from saved responses in DIR, never use the network (offline tests)",
-    )
+    # Offline tests only, like _oqa.add_common_args.
+    parser.add_argument("--fixture-dir", metavar="DIR", help=argparse.SUPPRESS)
     args = parser.parse_args()
 
     prefix, repo, number = parse_ref(args.ref)

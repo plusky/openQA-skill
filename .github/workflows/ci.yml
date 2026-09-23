@@ -34,7 +34,7 @@ jobs:
       # check-schedule.py takes, and both paths are exercised.
       - run: pip install PyYAML
       - name: Script suites
-        run: (rc=0; for t in tests/openqa/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
+        run: (rc=0; for t in tests/*/test-*.sh; do bash "$t" || rc=1; done; exit $rc)
       - name: Repository gates
         run: |
           python3 tests/repo/check-skills.py
@@ -50,7 +50,7 @@ jobs:
       - run: pipx install ruff==0.16.8
       - run: ruff check .
       - run: ruff format --check .
-      - run: shellcheck tests/openqa/test-*.sh
+      - run: shellcheck tests/*/test-*.sh
       # Advisory: the only check that tracks agentskills.io publish rules as
       # GitHub enforces them, but it is a preview command and may change.
       - name: Agent Skills spec (advisory)
@@ -63,4 +63,4 @@ jobs:
           curl -fsSL -o /tmp/shfmt \
             https://github.com/mvdan/sh/releases/download/v3.14.1/shfmt_v3.14.1_linux_amd64
           chmod +x /tmp/shfmt
-          /tmp/shfmt -d tests/openqa/test-*.sh
+          /tmp/shfmt -d tests/*/test-*.sh

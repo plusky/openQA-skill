@@ -18,7 +18,7 @@ From a defined scope to a build where every current failure carries a verified r
 scripts/oqa-sweep.py --host o3 --group 1 --todo
 ```
 
-`--group` repeats; `--build` defaults to the newest; `--include-softfailed` adds soft failures; rest: `--help`.
+`--group` repeats; `--build` defaults to the newest; `--include-softfailed` adds soft failures.
 
 **Header line per group and build** = openQA's build counters over the newest job per scenario; zero counters are left out:
 
