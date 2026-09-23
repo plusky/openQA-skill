@@ -93,6 +93,10 @@ def closest(sections, wanted, limit=5):
 
 
 def resolve(name):
+    # The skill's own documents, from any working directory: `-> SKILL.md "<Section>"`
+    # pointers, and the per-script flag notes that SKILL.md "Script flags" points at.
+    if name in ("SKILL.md", "scripts/README.md"):
+        return os.path.join(SKILL_DIR, name)
     if os.sep not in name:
         for candidate in (name, name + ".md"):
             path = os.path.join(REFERENCES, candidate)
