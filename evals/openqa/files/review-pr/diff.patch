@@ -1,0 +1,100 @@
+diff --git a/schedule/yam/agama_remote_access_disabled.yaml b/schedule/yam/agama_remote_access_disabled.yaml
+new file mode 100644
+index 00000000..49383109
+--- /dev/null
++++ b/schedule/yam/agama_remote_access_disabled.yaml
+@@ -0,0 +1,20 @@
++---
++name: agama_remote_access_disabled
++description: >
++  Perform interactive installation with agama for remote access disabled.
++schedule:
++  - yam/agama/boot_agama
++  - yam/agama/validate_remote_access_disabled
++  - yam/agama/patch_agama_tests
++  - yam/agama/agama
++  - installation/grub_test
++  - installation/first_boot
++  - yam/validate/validate_selinux
++  - yam/validate/validate_base_product
++  - yam/validate/validate_product
++  - yam/validate/validate_connectivity
++  - yam/validate/validate_first_user
++  - yam/validate/validate_hostname
++  - yam/validate/validate_snapshots
++  - yam/validate/validate_registered_products
++  - console/validate_repos
+diff --git a/schedule/yam/agama_remote_access_disabled_s390x.yaml b/schedule/yam/agama_remote_access_disabled_s390x.yaml
+new file mode 100644
+index 00000000..cdf6ebf3
+--- /dev/null
++++ b/schedule/yam/agama_remote_access_disabled_s390x.yaml
+@@ -0,0 +1,21 @@
++---
++name: agama_remote_access_disabled_s390x
++description: >
++  Perform interactive installation with agama for remote access disabled on s390x.
++schedule:
++  - yam/agama/boot_agama
++  - yam/agama/import_agama_profile
++  - yam/agama/patch_agama_tests
++  - yam/agama/validate_remote_access_disabled
++  - yam/agama/agama
++  - boot/reconnect_mgmt_console
++  - installation/first_boot
++  - yam/validate/validate_selinux
++  - yam/validate/validate_base_product
++  - yam/validate/validate_product
++  - yam/validate/validate_connectivity
++  - yam/validate/validate_first_user
++  - yam/validate/validate_hostname
++  - yam/validate/validate_snapshots
++  - yam/validate/validate_registered_products
++  - console/validate_repos
+diff --git a/tests/installation/bootloader_zkvm.pm b/tests/installation/bootloader_zkvm.pm
+index bcf734a3..ebe12237 100644
+--- a/tests/installation/bootloader_zkvm.pm
++++ b/tests/installation/bootloader_zkvm.pm
+@@ -100,8 +100,18 @@ sub run {
+     record_info('VM instance', get_var('VIRSH_INSTANCE'));
+     record_info('Guest ip', get_var('VIRSH_GUEST'));
+ 
++    my $is_remote_disabled = get_var('EXTRABOOTPARAMS', '') =~ /inst\.remote=0/;
++
+     if (is_agama) {
+-        wait_serial('Connect to the Agama installer using these URLs', 300) || die "Agama installer didn't start";
++        my %expectations = (
++            pattern => $is_remote_disabled
++            ? 'Remote access to the Agama installer is disabled, it can be used only locally'
++            : 'Connect to the Agama installer using these URLs',
++            error => $is_remote_disabled
++            ? "Remote access to Agama installer was not disabled"
++            : "Agama installer didn't start",
++        );
++        wait_serial($expectations{pattern}, 300) or die $expectations{error};
+         return;
+     }
+     if (!get_var("BOOT_HDD_IMAGE") or (get_var('PATCHED_SYSTEM') and !get_var('ZDUP'))) {
+diff --git a/tests/yam/agama/validate_remote_access_disabled.pm b/tests/yam/agama/validate_remote_access_disabled.pm
+new file mode 100644
+index 00000000..3e996218
+--- /dev/null
++++ b/tests/yam/agama/validate_remote_access_disabled.pm
+@@ -0,0 +1,17 @@
++## Copyright 2026 SUSE LLC
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++# Summary: Validate feature restrict network access to the installer.
++# integration test from GitHub.
++# Maintainer: QE Installation and Migration (QE Iam) <none@example.org>
++
++use Mojo::Base 'Yam::Agama::patch_agama_base';
++use testapi;
++
++sub run {
++    select_console 'install-shell';
++
++    die("Remote network hasn't been restricted") if (script_run("ss -tuln | grep -E '\[::1\]:80|443'") == 1);
++}
++
++1;
