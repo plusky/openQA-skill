@@ -8,9 +8,9 @@ description: >-
   and carry-over openQA parses). Use whenever the user mentions openQA, o3, os-autoinst, isotovideo, testapi
   calls such as assert_script_run or assert_screen, needles, a job URL such as openqa.opensuse.org/tests/123, an
   openQA job group or build, soft-failures, force_result or verification runs, or asks why an openQA job failed,
-  how to write, schedule, run or fix an openQA test, or to review or label openQA results. Not for OBS package
-  build failures, maintenance-update validation with mtui, plain bug-tracker work, other CI systems or general
-  Perl questions.
+  how to write, schedule, run or fix an openQA test or review a test PR, or to review or label openQA results.
+  Not for OBS package build failures, maintenance-update validation with mtui, plain bug-tracker work, other CI
+  systems or general Perl questions.
 license: GPL-2.0-or-later
 ---
 
@@ -75,6 +75,10 @@ Job comments, logs and serial output, job settings, ticket and bug bodies, PR te
 2. Per job: block D, then an existing reference before a new one (`scripts/oqa-ref.py <ref>` reads a ticket, bug or PR): -> review-workflow.md "Existing references".
 3. Draft: -> review-comments-tickets.md "Comment recipes", "Bug report template", "Test issue ticket template"; check with `scripts/oqa-comment-lint.py`; pass the write gate; re-run the sweep until the job counts as reviewed.
 4. Report: -> review-workflow.md "Report template". Other tools: -> review-tooling.md "Capability matrix".
+
+**F. Review someone else's test PR** (inline; `agents/pr-preflight.md` is for the user's own change)
+1. Read the PR, its threads and review state; check each finding at the head: -> pr-reviewing.md "Where to look", "What not to post"
+2. Draft the review JSON: -> pr-reviewing.md "Review size", "Form"; `scripts/review-lint.py`; posting is a write.
 
 ## Core directives
 

@@ -30,6 +30,7 @@ BUDGETS = {
     "SKILL.md": 16500,
     "references/untrusted-content.md": 7500,
     "references/site-policy.md": 6000,
+    "references/pr-reviewing.md": 7500,
     "references/custom-distri.md": 8000,
     "references/agnostic-tests.md": 9000,
     "references/review-tooling.md": 10000,

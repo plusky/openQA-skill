@@ -10,7 +10,7 @@ format pick up the `SKILL.md` frontmatter directly.
 
 | Skill | Use it when | What it does |
 |---|---|---|
-| [`openqa`](skills/openqa/SKILL.md) | writing, scheduling, running or fixing an openQA test; asking why a job failed; reviewing a job group or build | **Create**: test modules for os-autoinst-distri-opensuse or a custom test distribution, needles, YAML schedules, verification runs, pull requests that pass review. **Review**: triage a failed or incomplete job from its artifacts, sweep a group or build, classify product bug / test issue / infrastructure / sporadic, draft bug reports and comments that openQA parses as references. |
+| [`openqa`](skills/openqa/SKILL.md) | writing, scheduling, running or fixing an openQA test; asking why a job failed; reviewing a job group or build, or someone else's test PR | **Create**: test modules for os-autoinst-distri-opensuse or a custom test distribution, needles, YAML schedules, verification runs, pull requests that pass review. **Review**: triage a failed or incomplete job from its artifacts, sweep a group or build, classify product bug / test issue / infrastructure / sporadic, draft bug reports and comments that openQA parses as references; review someone else's test PR at the right size. |
 
 One skill covers both jobs on purpose: they share the openQA model, the failure-triage method, the cloning
 recipes and most scripts, and they hand over to each other (a review finds a test issue, a verification run
