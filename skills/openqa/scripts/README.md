@@ -171,6 +171,30 @@ Exit 1: warnings (`  W <id> line N: ...`), e.g. `placeholder-bugref` (`poo#<id>`
 parsed, job stays unreviewed). `labels:`, `flags:`, `force_result:` only when present. Exit 2: draft over
 65536 characters or a line over 1000; every list stops after 40 entries (`... N more not shown`).
 
+## review-lint.py - size and form of a drafted PR review (offline)
+
+Checks the budget of references/pr-reviewing.md "Review size", not whether a finding is right.
+
+    review-lint.py [FILE] --lines N [--lib] [--late] [--replies N]    # FILE: the review JSON
+
+    budget: 331 changed lines, tests/, data/, schedule/ only: 4 non-blocking items, 1500 chars
+    draft: COMMENT, 0 comments + body; blocking 1, nit 0, non-blocking prose 0 chars
+    size ok: 0/4 items, 0/1500 chars; the findings themselves are not checked
+
+`--lines`: additions + deletions; `--lib`: the PR changes anything beyond tests/, data/, schedule/ (ceilings
+2/4/5/8 instead of 3/5/4/4); `--late`: merged or holding the approvals the merge needs, so every item must
+start `blocking:`; `--replies N`: thread replies posted beside the review, one non-blocking item each. Items
+starting `blocking:` count against no budget; `nit:` and unprefixed ones do, and so does any other body. Prose
+leaves out fenced code, `>` quotes and URLs, and counts characters after NFC. Exit 1: findings (` F <id>
+<where>: ...`): `prefix` (`**nit:**`, `nitpick:` and other near misses, or the prefix after a quote), `commit`
+(no `commit_id`), `over-count`, `over-chars`, `long-comment` (600, blocking 1000), `long-body` (300 beside
+comments, unless blocking), `nits` (2), `long-nit` (one line, 150 with the prefix), `lone-nits` (no unprefixed
+inline comment and nothing blocking), `duplicate` (suggestion-only comments may repeat), `unclosed-fence`,
+`pasted-block` (over 10 lines or 800 chars, not a suggestion), `quotes` (over 2 lines or 300 chars), `late`,
+`event` (APPROVE with text, REQUEST_CHANGES without a blocking item, empty COMMENT). Exit 2: not a review JSON
+object (`event` COMMENT, APPROVE or REQUEST_CHANGES; `body` and `commit_id` strings; each comment a non-empty
+`body`, a `path` and an integer `line` or `position`), over 262144 characters.
+
 ## vr-clone-cmd.py - build, never run, a clone command
 
 Forgotten `_GROUP=0`, assets published from a test branch, clones on production.
