@@ -202,17 +202,17 @@ def lint(review, lines, kind, late, replies=0):
         else:
             seen[key] = x["where"]
     for x in items:
-        for info, count, size_chars, closed in x["blocks"]:
+        for info, block_lines, size_chars, closed in x["blocks"]:
             if not closed:
                 found.append(
                     f"unclosed-fence {x['where']}: a code block never closes; "
                     "the rest of the text escapes every check"
                 )
             if info != "suggestion" and (
-                count > BLOCK_LINES or size_chars > BLOCK_CHARS
+                block_lines > BLOCK_LINES or size_chars > BLOCK_CHARS
             ):
                 found.append(
-                    f"pasted-block {x['where']}: a {count}-line, {size_chars}-char code block; "
+                    f"pasted-block {x['where']}: a {block_lines}-line, {size_chars}-char code block; "
                     "link the step or the line"
                 )
         if x["quote_lines"] > QUOTE_LINES or x["quote_chars"] > QUOTE_CHARS:

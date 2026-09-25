@@ -59,6 +59,8 @@ out=$(lint "$fixtures/right-26762.json" --lines 331 --late)
 rc=$?
 check "its blocking-only rewrite passes even late" "0" "$(result)"
 check "success names what is not checked" "size ok: 0/4 items, 0/1500 chars; the findings themselves are not checked" "$(tail -n 1 <<<"$out")"
+out=$(draft COMMENT "" "fix it" "$(printf 'and this:\n```suggestion\nfixed\n```')" | lint --lines 12)
+check "the item count survives a code block" "size ok: 2/3 items, 15/600 chars; the findings themselves are not checked" "$(tail -n 1 <<<"$out")"
 
 # --- budget: count ------------------------------------------------------------------
 # edge NAME COUNT LINES [ARGS]: COUNT items at the top of a size bucket, then one line later
